@@ -1,0 +1,42 @@
+{
+	"input_webcam": {
+		"device": 0,
+		"scale": 1.0,
+		"delay": 50,
+		"fps": 60
+	},
+
+	"image_preview": {
+		"receive":{
+			"image_data": "input_webcam",
+			"tracker_parameters": "openface_tracker"
+		}
+	},
+
+	"openface_tracker": {
+		"send_image": false,
+		"receive":{
+			"image_data": "input_webcam"
+		}
+	},
+
+	"openface_smoother": {
+		"receive":{
+			"tracker_parameters": "openface_tracker"
+		}
+	},
+
+	"openface_to_fexmm_remapper": {
+		"receive" : {
+			"tracker_parameters": "openface_smoother"
+		}
+	},
+
+	"blender_display": {
+		"blend": "data/blend/example.blend",
+		"init": "modules/blender_display/blender_display_avatar.py",
+		"receive": {
+			"fexmm_parameters": "openface_to_fexmm_remapper"
+		}
+	}
+}

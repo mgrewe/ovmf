@@ -1,0 +1,6 @@
+*__pycache__*
+env/*
+.vscode/*
+*.blend1
+contrib/[bB]lender*
+logs/*

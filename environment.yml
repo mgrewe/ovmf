@@ -1,0 +1,13 @@
+name: ovmf
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.9
+  - make=4.3
+  - cmake=3.21
+  - openblas=0.3.18
+  - opencv=4.5.3
+  - dlib-cpp=19.22
+  - scipy=1.7
+  - pyzmq=22.3

@@ -1,0 +1,66 @@
+{
+	"input_webcam":{
+		"file": "modules/input/input_webcam.py",
+		"use_sockets": true,
+		"queue_size": 1,
+		"device": 0,
+		"width": 640,
+		"height": 480,
+		"fourcc": "MJPG",
+		"fps": 120,
+		"scale": 1.0,
+		"delay": 60,
+		"capture_thread": false
+	},
+
+	"image_preview":{
+		"file": "modules/utils/image_preview.py",
+		"use_sockets": true,
+		"queue_size": 1
+	},
+	
+	"openface_to_fexmm_remapper": {
+		"file": "modules/fexmm/openface_to_fexmm_remapper.py",
+		"maps": "lrae",
+		"use_sockets": true,
+		"queue_size": 1
+	},
+	
+	"openface_tracker": {
+		"file": "modules/openface/openface_tracker.py",
+		"use_sockets": true,
+		"queue_size": 1
+	},
+
+	"openface_service": {
+		"file": "modules/openface/openface_service.py",
+		"use_sockets": true,
+		"queue_size": 1
+	},
+
+	"openface_smoother": {
+		"file": "modules/openface/openface_smoother.py",
+		"use_sockets": true,
+		"queue_size": 1
+	},
+
+	"blender_display": {
+		"file": "modules/blender_display/blender_display.py",
+		"use_sockets": true,
+		"queue_size": 1,
+		"blend": "",
+		"init": ""
+	},
+
+	"blender_render_output": {
+		"file": "modules/blender_display/blender_render_output.py",
+		"use_sockets": true,
+		"queue_size": 1,
+		"address": "tcp://127.0.0.1:424242"
+},
+
+	"control_commands": {
+		"address": "tcp://127.0.0.1:424250"
+	}
+
+}

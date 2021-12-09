@@ -1,0 +1,5 @@
+{
+	"blender_executable": "contrib/Blender/blender",
+	"openface_binary_dir": "contrib/OpenFace/build/bin/",
+	"openface_model_au_root_dir": "contrib/OpenFace/build/bin/"
+}
