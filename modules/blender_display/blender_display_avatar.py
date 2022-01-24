@@ -37,7 +37,7 @@ class BlenderReceiver(ModuleBase):
         rv_config = config
         rv_config['use_sockets'] = False
         self.receivers.append(BlenderFexMMReceiver(rv_config, self.avatars, self.gaze_origin))
-        ro_config = loadConfig('example', 'blender_render_output')
+        ro_config = loadConfig(config['pipeline'], 'blender_render_output')
         ro_config = {**config, **ro_config}
         self.render_output = BlenderRenderOutput(ro_config, blender_render_context,start_sender_thread=True)
         self.render_output.start_streaming()

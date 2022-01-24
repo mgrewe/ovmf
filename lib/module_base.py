@@ -128,25 +128,28 @@ class ModuleBase():
 
 
 
-def loadConfig(pipeline, module=None):
-    pf = dir / f'config/pipelines/{pipeline}.json'
-    if not pf.exists():
-        raise Exception(f"pipeline '{pipeline}' does not exist")
-    with open(pf) as f:
-        local_config = json.load(f)
+def loadConfig(pipeline=None, module=None):
     with open(dir / 'config/modules.json') as f:
         global_config = json.load(f)
+    if pipeline:
+        pf = dir / f'config/pipelines/{pipeline}.json'
+        if not pf.exists():
+            raise Exception(f"pipeline '{pipeline}' does not exist")
+        with open(pf) as f:
+            local_config = json.load(f)
+    else:
+        local_config = {}
+    for m in global_config.keys():
+        tmp_config = local_config.get(m, {})
+        tmp_config['pipeline'] = pipeline
+        tmp_config['name'] = m
+        tmp_config['control_commands'] = global_config["control_commands"]['address']
+        if not 'send_image' in tmp_config:
+            tmp_config['send_image'] = True
+        if m == module:
+            local_config[m] = tmp_config
     if module:
-        try:
-            local_config = local_config[module]
-        except:
-            local_config = {}
-        local_config['pipeline'] = pipeline
-        local_config['name'] = module
-        local_config['control_commands'] = global_config["control_commands"]['address']
-        if not 'send_image' in local_config:
-            local_config['send_image'] = True
-        return {**global_config[module], **local_config}
+        return {**global_config[module], **local_config.get(module, {})}
     else:
         return global_config, local_config
 
@@ -188,7 +191,7 @@ class ProcessBase(Process):
 
     def run(self):
         Path('logs').mkdir(parents=True, exist_ok=True)
-        with output_redirected(sys.stdout, open(f'logs/{self.name}.txt', 'w')), output_redirected(sys.stderr, sys.stdout):
+        with output_redirected(sys.stdout, open(f'logs/{self.name}.txt', 'w', encoding='utf-8')), output_redirected(sys.stderr, sys.stdout):
             try:
                 self.main()
             except:

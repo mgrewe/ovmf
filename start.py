@@ -94,13 +94,8 @@ class ZIB_Pipeline:
 					continue
 				config['receive'] = recv
 			config = {**global_config, **config}
-			config['pipeline'] = self.pipeline
-			config['name'] = module
 			if not 'address' in config:
 				config['address'] = f"{PROTOCOL}://{HOST}:{next_port}"
-			if not 'send_image' in config:
-				config['send_image'] = True
-			config['control_commands'] = self.global_config["control_commands"]['address']
 			next_port += 1
 
 			# start this module
@@ -124,7 +119,7 @@ class ZIB_Pipeline:
 		return len(self.modules_started) > 0
 
 	def openLog(self, module):
-		self.log = open(f"logs/{self.modules_started[module]['name']}.txt", 'r+')
+		self.log = open(f"logs/{self.modules_started[module]['name']}.txt", 'r+', encoding='utf-8')
 #		print("\033c", end="") # clear screen
 		print(f"\n\n#####################\n# {self.modules_started[module]['name']}\n#####################\n")
 
