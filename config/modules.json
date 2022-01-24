@@ -57,7 +57,11 @@
 		"use_sockets": true,
 		"queue_size": 1,
 		"address": "tcp://127.0.0.1:424242"
-},
+	},
+
+	"psychopy_display": {
+		"file": "modules/psychopy_display/display_avatar.py"
+	},
 
 	"control_commands": {
 		"address": "tcp://127.0.0.1:424250"

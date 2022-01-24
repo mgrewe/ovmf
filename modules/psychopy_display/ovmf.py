@@ -3,8 +3,13 @@ import sys
 import time
 import numpy as np
 from PIL import Image
-sys.path.append(str(Path(__file__).parents[2] / 'lib'))
-from connection import Sender, Receiver, getAddress
+
+dir = str(Path(__file__).resolve().parents[2])
+if not dir in sys.path:
+    sys.path.append(dir)
+from lib.connection import Sender, Receiver
+from lib.module_base import loadConfig
+
 
 class Interface:
     '''
@@ -17,7 +22,7 @@ class Interface:
     in your Psychopy experiments.
     '''
 
-    def __init__(self, view_only = False, debug = True):
+    def __init__(self, view_only = False, debug = True, pipeline=None):
         '''
         Set view_only = True if you want to display the avatar only. 
         This is usefull to allow control from another process.
@@ -25,13 +30,11 @@ class Interface:
         Set debug = True to print out some infos.
         '''
         self.debug = debug
-        sock_address = getAddress('blender_render_output', None)[0]
-        print(sock_address)
-        self.receiver = Receiver(address = sock_address,queue_size=1,drop_images_before_processing=False)[sock_address]
+        config = loadConfig(pipeline=pipeline, module='blender_render_output')
+        self.receiver = Receiver(address = config['address'], type='render_output', queue_size=config['queue_size'])['render_output']
         self.view_only = view_only
         if not view_only:
-            sock_address = getAddress('control_commands', None)[0]
-            self.commands = Sender(address = sock_address)
+            self.commands = Sender(address = config['control_commands'])
             # Need some time to init...
             time.sleep(1)
 

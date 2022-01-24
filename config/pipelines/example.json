@@ -38,5 +38,11 @@
 		"receive": {
 			"fexmm_parameters": "openface_to_fexmm_remapper"
 		}
+	},
+
+	"psychopy_display": {
+		"receive" : {
+			"render_output": "blender_display"
+		}
 	}
 }
