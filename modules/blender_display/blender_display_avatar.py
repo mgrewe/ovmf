@@ -16,7 +16,7 @@ from lib.module_base import ModuleBase, loadConfig
 class BlenderReceiver(ModuleBase):
 
     avatars = {
-        '3D1001': bpy.data.objects['3D1001'],
+        'FexMM': bpy.data.objects['FexMM'],
         }
 
     gaze_origin = bpy.data.objects['Avatar_Gaze']
