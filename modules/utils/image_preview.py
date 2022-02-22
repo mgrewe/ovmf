@@ -2,9 +2,6 @@ import sys
 from pathlib import Path
 import cv2
 
-dir = str(Path(__file__).resolve().parents[2])
-if not dir in sys.path:
-    sys.path.append(dir)
 from lib.module_base import ModuleBase, ProcessBase
 
 

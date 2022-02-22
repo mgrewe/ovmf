@@ -3,9 +3,6 @@ import pathlib as pl
 import numpy as np
 from scipy.spatial.transform import Rotation as R
 
-dir = str(pl.Path(__file__).resolve().parents[2])
-if not dir in sys.path:
-    sys.path.append(dir)
 from lib.module_base import ModuleBase, ProcessBase
 
 

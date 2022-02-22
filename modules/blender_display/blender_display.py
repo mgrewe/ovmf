@@ -1,6 +1,5 @@
 '''
 	This script opens an instance of the eevee-based display module
-	Currently, the path to the blender binary needs to be hard-coded
 '''
 
 import json, sys, os
@@ -8,9 +7,6 @@ from pathlib import Path
 from subprocess import Popen
 from multiprocessing import Value
 
-dir = str(Path(__file__).resolve().parents[2])
-if not dir in sys.path:
-    sys.path.append(dir)
 from lib.module_base import ProcessBase
 
 

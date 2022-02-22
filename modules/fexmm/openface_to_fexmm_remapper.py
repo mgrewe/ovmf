@@ -4,9 +4,6 @@ import copy
 import numpy as np
 from scipy.spatial.transform import Rotation
 
-dir = str(pl.Path(__file__).resolve().parents[2])
-if not dir in sys.path:
-    sys.path.append(dir)
 from lib.module_base import ModuleBase, ProcessBase
 from lib.auxiliary import get_time_ms
 
