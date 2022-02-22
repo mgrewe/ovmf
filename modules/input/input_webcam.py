@@ -40,8 +40,10 @@ class InputWebcam(ModuleBase):
             self.camera = cv2.VideoCapture(int(config["device"]), cv2.CAP_V4L2)
         else:
             raise Exception('Operating System not supportet.')
+        # Set FPS twice to make sure it is correctly set on different systems
         self.camera.set(cv2.CAP_PROP_FPS, int(config["fps"]))	# on some systems fps must be set before fourcc
         self.camera.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*config["fourcc"][:4]))
+        self.camera.set(cv2.CAP_PROP_FPS, int(config["fps"]))	# on some systems fps must be set before fourcc
         self.camera.set(cv2.CAP_PROP_BUFFERSIZE, 1)
         self.camera.set(cv2.CAP_PROP_FRAME_WIDTH, int(config["width"]))
         self.camera.set(cv2.CAP_PROP_FRAME_HEIGHT, int(config["height"]))
@@ -60,7 +62,7 @@ class InputWebcam(ModuleBase):
         print("  scale factor:      " + str(self.scale))
         print("  fx, fy, cx, cy:    " + str(self.intrinsics))
         print("")
-        print("Sending delay:" + str(config["fps"]))
+        print("Sending delay:" + str(self.delay))
 
         if bool(config["capture_thread"]):
             print("Using async capture thread.")
@@ -72,7 +74,7 @@ class InputWebcam(ModuleBase):
     def process(self, data, image, receiver_channel):
 
         if not self.running:
-            # Make sure to continuously grab frames even if we don't deliver it.
+            # Make sure to continuously grab frames even if we don't deliver them.
             # # this avoids outdated images in the driver's queue.
             self.capture_image()
 
