@@ -10,8 +10,6 @@ if not dir in sys.path:
     sys.path.append(dir)
 from lib.auxiliary import get_time_ms
 from lib.module_base import ModuleBase, ProcessBase
-from modules.input.utils import guessIntrinsics
-
 
 USE_SELF_ESTIMATED_TIMESTAMP = True
 
@@ -50,7 +48,7 @@ class InputWebcam(ModuleBase):
         self.scale = float(config["scale"])
         self.delay = float(config["delay"])
 
-        self.intrinsics = guessIntrinsics(self.scale * self.camera.get(cv2.CAP_PROP_FRAME_WIDTH),
+        self.intrinsics = InputWebcam.guessIntrinsics(self.scale * self.camera.get(cv2.CAP_PROP_FRAME_WIDTH),
                         self.scale * self.camera.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
         print("Camera " + str(config["device"]) + " opened with:")
@@ -124,5 +122,16 @@ class InputWebcam(ModuleBase):
         self.new_image.set()
         self.lock.release()
 
+
+    def guessIntrinsics(frame_width, frame_height):
+        cx = frame_width / 2.0
+        cy = frame_height / 2.0
+        fx = 500.0 * (frame_width / 640.0)
+        fy = 500.0 * (frame_height / 480.0)
+
+        fx = (fx + fy) / 2.0
+        fy = fx
+
+        return (fx, fy, cx, cy)
 
 Module = ProcessBase(InputWebcam)
