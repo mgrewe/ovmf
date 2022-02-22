@@ -22,17 +22,16 @@ class Proc(ProcessBase):
             size=[1088, 728],
             units="pix",
             fullscr=False,
-            gammaErrorPolicy = 'ignore')
+            gammaErrorPolicy = 'ignore',
+            waitBlanking=False)
 
         img = visual.ImageStim(win, units = 'pix')
         img.size = [640, 480]
         img.setAutoDraw(False)
         img.interpolate = True
 
-        # Currently possible in the Oldenburg study 1: '3D1001', '3D1012', '1004', '1034', '1046'
-        vm_interface.set_avatar('3D1001') 
+        vm_interface.set_avatar('FexMM') 
         vm_interface.set_delay(0)
-        vm_interface.set_expression_scale(1)
 
         while True:
 
