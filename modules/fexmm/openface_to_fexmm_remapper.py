@@ -67,7 +67,7 @@ class OpenFaceToFexMMRemapper(ModuleBase):
 
     def process(self, data, image, channel_name):
         parameters = data
-        fexmm_parameters = copy.deepcopy(parameters)
+        fexmm_parameters = copy.copy(parameters)
 
         ############## LOCATION
         
