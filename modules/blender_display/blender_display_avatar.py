@@ -8,6 +8,7 @@ if not dir in sys.path:
 dir = str(pathlib.Path(dir).resolve().parents[1])
 if not dir in sys.path:
     sys.path.append(dir)
+    
 from blender_fexmm_receiver import BlenderFexMMReceiver
 from blender_render_output import BlenderRenderOutput
 from lib.module_base import ModuleBase, loadConfig

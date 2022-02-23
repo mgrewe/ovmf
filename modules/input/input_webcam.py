@@ -5,9 +5,6 @@ from threading import Thread, Lock, Event
 from platform import system as pf_system
 import cv2
 
-dir = str(Path(__file__).resolve().parents[2])
-if not dir in sys.path:
-    sys.path.append(dir)
 from lib.auxiliary import get_time_ms
 from lib.module_base import ModuleBase, ProcessBase
 from modules.input.utils import guessIntrinsics
