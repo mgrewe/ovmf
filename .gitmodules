@@ -1,3 +1,3 @@
 [submodule "contrib/OpenFace"]
 	path = contrib/OpenFace
-	url = git@github.com:mgrewe/OpenFace.git
+	url = https://github.com/mgrewe/OpenFace.git
