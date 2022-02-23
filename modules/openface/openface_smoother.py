@@ -4,51 +4,37 @@ from lib.module_base import ModuleBase, ProcessBase
 
 
 class OpenFaceSmoother(ModuleBase):
-    # Currently, a lower smoothing factor actually means more smoothing, which is little intuitive.
-    # TODO: Invert smoothing values
+    # Smoothing factor between 0 (no smoothing) and 1 (max smoothing, i.e., no movement)
+
     # TODO: Use time for determining smoothing factor, since it currenty depends on fps.
     
+    # movement, smoothing factor (0,1)
     smoothing = {
-        'au': 0.4,
+        'au': 0.6,
         'pose_rotation': 0.5,
         'pose_location': 0.5,
-        'gaze': 0.2,
+        'gaze': 0.8,
         }
 
-        # OpenFace AU, FexMM Shapekey
+    # Individual smoothing factors for Action Units
+    # OpenFace AU, smoothing factor (0,1)
     au_smoothing = {
-            # # Eye units
-            # 'AU01':1,
-            # 'AU02':1,
-            # 'AU04':1,
-             'AU05':1/3,
-            # 'AU06':1,
-            # 'AU07':2,
-            # # Nose wrinkler
-            # 'AU09':1,
-            # # Mouth units
-            # 'AU10': 1,
-            # 'AU12': 1,
-            # 'AU14': 1,
-            # 'AU15': 1,
-            # 'AU17': 1,
-            # 'AU20': 1,
-            # 'AU23': 1,
-            # 'AU25': 1,
-            'AU26' : 2/3
+            #  'AU05':2/3,
+            # 'AU26' : 1/3
             }
 
-    dynamic_au_smoothing = True
-
-    # clamp rotation within interval
+    # Avoid too large rotations by
+    # clamping to interval
     restrict_pose = False
     rotation_interval = np.pi/8
 
-    # damp au's with higher head rotation
+    # Avoid strange movements with large rotations due to tracking errors by
+    # damping AUs with higher head rotation
     smooth_au_by_pose = True
     rotation_smooth_interval = np.pi/5
     
-    exclude_au_from_smoothing = ['AU45']
+    # Specify AUs which are never smoothed
+    exclude_au_from_smoothing = []
     
     last_data = None
 
@@ -64,7 +50,6 @@ class OpenFaceSmoother(ModuleBase):
             self.smoothing['pose_location'] = float(update['smoothing_factor_pose'])
 
     def process(self, data, image, receiver_channel):
-        # data = self.receiver['tracker_parameters'].receive()
         
         au_fac = self.smoothing['au']
         pose_rotation_fac = self.smoothing['pose_rotation']
@@ -75,8 +60,6 @@ class OpenFaceSmoother(ModuleBase):
         if (self.last_data == None):
             self.last_data = data
             return data, image
-
-        #print(self.last_data['timestamp'] - data['timestamp'])
 
         if ('au' in data):
             if (self.smooth_au_by_pose):
@@ -105,7 +88,7 @@ class OpenFaceSmoother(ModuleBase):
                     au_fac_ind = au_fac * self.au_smoothing[key]
                 else:
                     au_fac_ind = au_fac
-                data['au'][key] = au_fac_ind * value + (1 - au_fac_ind) * self.last_data['au'][key]
+                data['au'][key] = (1 - au_fac_ind) * value + au_fac_ind * self.last_data['au'][key]
                 
 
         if ('pose' in data):
@@ -113,14 +96,14 @@ class OpenFaceSmoother(ModuleBase):
                 data['pose'][3:5]=np.clip(data['pose'][3:5],-self.rotation_interval,self.rotation_interval)
 
             pose = data['pose']
-            pose[3:6] = pose_rotation_fac *  np.array(data['pose'])[3:6] + (1 - pose_rotation_fac) * np.array(self.last_data['pose'])[3:6]
-            pose[0:3] = pose_location_fac *  np.array(data['pose'])[0:3] + (1 - pose_location_fac) * np.array(self.last_data['pose'])[0:3]
+            pose[3:6] = (1 - pose_rotation_fac) *  np.array(data['pose'])[3:6] + pose_rotation_fac * np.array(self.last_data['pose'])[3:6]
+            pose[0:3] = (1 - pose_location_fac) *  np.array(data['pose'])[0:3] + pose_location_fac * np.array(self.last_data['pose'])[0:3]
             data['pose'] = pose
 
 
         
         if ('gaze' in data):
-            gaze  = gaze_fac *  np.array(data['gaze']) + (1 - gaze_fac) * np.array(self.last_data['gaze'])
+            gaze  = (1 - gaze_fac) *  np.array(data['gaze']) + gaze_fac * np.array(self.last_data['gaze'])
             data['gaze'] = gaze.tolist()
 
 

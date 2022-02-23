@@ -13,10 +13,7 @@ from lib.module_base import loadConfig
 
 class Interface:
     '''
-    This class provides an interface to the 
-    face_vr framework developed at ZIB.
-
-    Contact: Martin Grewe (grewe@zib.de)
+    Python Interface to the Open Virtual Mirror Framework
 
     Please see display_avatar*.py for examples how to use the interface 
     in your Psychopy experiments.
@@ -25,7 +22,7 @@ class Interface:
     def __init__(self, view_only = False, debug = True, pipeline=None):
         '''
         Set view_only = True if you want to display the avatar only. 
-        This is usefull to allow control from another process.
+        Only useful if you want to use multiple Interfaces.
 
         Set debug = True to print out some infos.
         '''
@@ -45,10 +42,13 @@ class Interface:
             return True
 
     def set_parameter(self, params_dict):
+        '''
+        Set generic parameters in form of a dictionary. 
+        Look at the modules for supported parameters.
+        '''
         if self.debug:
             print("Parameter: " + str(params_dict))
         self.commands.send(params_dict)
-
 
     def set_delay(self, delay = 0):
         '''
@@ -72,7 +72,6 @@ class Interface:
             'display_avatar' : avatar
         }
         self.set_parameter(params)
-
 
     def set_scale(self, scale = 1.0):
         '''
@@ -140,49 +139,6 @@ class Interface:
         }
         self.set_parameter(params)
 
-    def set_expression_scale(self, expression_scale = 1.0):
-        '''
-        set avatar expression scale factor, e.g. for damping or amplification.
-        expression_scale = 0 completely cancels au activation.
-        '''
-
-        if self.check_view_only():
-            return
-
-        params = {
-            'fexmm_expression_scale' : expression_scale
-        }
-        self.set_parameter(params)
-
-        
-    def set_combiner_channel(self, channel = None):
-        '''
-        set avatar pose scale factor, e.g. for damping or amplification.
-        pose_scale = 0 completely cancels poses
-        '''
-
-        if self.check_view_only():
-            return
-
-        params = {
-            'combiner_active_receiver_channel' : channel
-        }
-        self.set_parameter(params)
-
-    def set_pose_scale(self, pose_scale = 1.0):
-        '''
-        set avatar pose scale factor, e.g. for damping or amplification.
-        pose_scale = 0 completely cancels poses
-        '''
-
-        if self.check_view_only():
-            return
-
-        params = {
-            'fexmm_pose_scale' : pose_scale
-        }
-        self.set_parameter(params)
-
     def receive_image(self):
         return self.receiver.receive(block = False)
    
@@ -198,7 +154,7 @@ class Interface:
         if imgStim is not None:
             data, image = self.receive_image()
 
-            # VERY SLOW. TODO: Improve and fix if image exceeds ImageStim size
+            # SLOW. TODO: Improve and fix if image exceeds ImageStim size
             if image is not None:
                 if adjust_render_size:
                     img = Image.fromarray(image).convert('RGBA')
