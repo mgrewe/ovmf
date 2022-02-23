@@ -1,5 +1,3 @@
-import sys
-import pathlib as pl
 import copy
 import numpy as np
 from scipy.spatial.transform import Rotation

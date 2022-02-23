@@ -1,6 +1,4 @@
-import sys
 import time
-from pathlib import Path
 from threading import Thread, Lock, Event
 from platform import system as pf_system
 import cv2
