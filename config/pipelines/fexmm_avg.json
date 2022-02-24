@@ -32,9 +32,9 @@
 		}
 	},
 
-	"blender_display": {
+	"blender_renderer": {
 		"blend": "data/fexmm_avg_face.blend",
-		"init": "modules/blender_display/blender_display_avatar.py",
+		"init": "modules/blender_renderer/blender_avatar.py",
 		"receive": {
 			"fexmm_parameters": "openface_to_fexmm_remapper"
 		}

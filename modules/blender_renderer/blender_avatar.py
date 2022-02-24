@@ -14,7 +14,7 @@ from blender_render_output import BlenderRenderOutput
 from lib.module_base import ModuleBase, loadConfig
 from lib.auxiliary import get_time_ms
 
-class BlenderReceiver(ModuleBase):
+class BlenderAvatar(ModuleBase):
 
     avatars = bpy.data.collections['Avatars'].children
 
@@ -27,7 +27,7 @@ class BlenderReceiver(ModuleBase):
     last_data = {}
     
 
-    def __init__(self, config, blender_render_context, **kwargs):
+    def __init__(self, config, **kwargs):
 
         super().__init__(config, **kwargs)
 
@@ -87,9 +87,9 @@ class StreamingOperator(bpy.types.Operator):
         args, _ = parser.parse_known_args(argv)
         config = json.loads(args.config)
 
-        self.blender_receiver = BlenderReceiver(config, context)
+        self.blender_receiver = BlenderAvatar(config)
 
-        self._handle_3d = bpy.types.SpaceView3D.draw_handler_add(StreamingOperator.draw, (self, context), 'WINDOW', 'PRE_VIEW') # this draws the viewport objects alone (without grid)
+        self._handle_3d = bpy.types.SpaceView3D.draw_handler_add(StreamingOperator.draw, (self, context), 'WINDOW', 'PRE_VIEW')
 
         context.window_manager.modal_handler_add(self)
         return {'RUNNING_MODAL'}

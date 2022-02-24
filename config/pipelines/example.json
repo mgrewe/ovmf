@@ -1,6 +1,6 @@
 {
 	"input_webcam": {
-		"device": 0,
+		"device": 2,
 		"scale": 1.0,
 		"delay": 0,
 		"fps": 30
@@ -32,9 +32,9 @@
 		}
 	},
 
-	"blender_display": {
+	"blender_renderer": {
 		"blend": "data/CubeFace.blend",
-		"init": "modules/blender_display/blender_display_avatar.py",
+		"init": "modules/blender_renderer/blender_avatar.py",
 		"receive": {
 			"fexmm_parameters": "openface_to_fexmm_remapper"
 		}
@@ -42,7 +42,7 @@
 
 	"psychopy_display": {
 		"receive" : {
-			"render_output": "blender_display"
+			"render_output": "blender_renderer"
 		}
 	}
 }

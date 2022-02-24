@@ -21,7 +21,7 @@
 	
 	"openface_to_fexmm_remapper": {
 		"file": "modules/fexmm/openface_to_fexmm_remapper.py",
-		"maps": "lrae",
+		"maps": "lra",
 		"use_sockets": true,
 		"queue_size": 1
 	},
@@ -44,8 +44,8 @@
 		"queue_size": 1
 	},
 
-	"blender_display": {
-		"file": "modules/blender_display/blender_display.py",
+	"blender_renderer": {
+		"file": "modules/blender_renderer/blender_renderer.py",
 		"use_sockets": true,
 		"queue_size": 1,
 		"blend": "",
@@ -53,7 +53,7 @@
 	},
 
 	"blender_render_output": {
-		"file": "modules/blender_display/blender_render_output.py",
+		"file": "modules/blender_renderer/blender_render_output.py",
 		"use_sockets": true,
 		"queue_size": 1,
 		"address": "tcp://127.0.0.1:424242"
