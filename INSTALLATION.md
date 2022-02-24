@@ -5,12 +5,12 @@ Download [Blender](https://www.blender.org/download/), preferably portable versi
 
 Install ZeroMQ into Blenders Python:
 ```
-Blender/2.91/python/bin/python.exe -m pip install -U pip
-Blender/2.91/python/bin/python.exe -m pip install pyzmq
+Blender/3.0/python/bin/python.exe -m pip install -U pip
+Blender/3.0/python/bin/python.exe -m pip install pyzmq opencv-python
 ```
 
 ## Compiler (Windows only)
-Download and install [Visual Studio 2022 Build Tools](https://aka.ms/vs/17/release/vs_buildtools.exe). Select at least `MSVCv142 - VS 2019 C++ x64/x86 build tools` and `Windows 10 SDK` for installation.  
+Download and install [Visual Studio 2019 Build Tools](https://aka.ms/vs/16/release/vs_buildtools.exe). Select `Desktop Development with C++` and then at least `MSVCv142 - VS 2019 C++ x64/x86 build tools` and `Windows 10 SDK` for installation.  
 For more information check [this guide](https://wiki.python.org/moin/WindowsCompilers).
 
 ## Conda
