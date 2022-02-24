@@ -1,3 +1,4 @@
 data/*.blend filter=lfs diff=lfs merge=lfs -text
 data/CubeFace.blend filter=lfs diff=lfs merge=lfs -text
 data/framework.jpg filter=lfs diff=lfs merge=lfs -text
+data/fexmm_license_agreement.pdf filter=lfs diff=lfs merge=lfs -text
