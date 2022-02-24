@@ -1,6 +1,5 @@
 {
 	"input_webcam": {
-		"device": 2,
 		"scale": 1.0,
 		"delay": 0,
 		"fps": 30
