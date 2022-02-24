@@ -71,6 +71,21 @@ class ModuleBase():
         '''
         pass
         
+
+    def add_time_measurement(self, data, start_time, end_time, modulename = None):
+        if data is None:
+            data = {}
+        if modulename is None:
+            modulename = str(type(self).__name__)
+        if 'time_statistics' not in data.keys():
+            data['time_statistics'] = {}
+        if modulename not in data['time_statistics'].keys():
+            data['time_statistics'][modulename]= {}
+                
+        # separated time_statistics for processing time and time for the whole process
+        data['time_statistics'][modulename]["start_time"] = start_time
+        data['time_statistics'][modulename]["end_time"] = end_time
+
     def process_and_measure(self, data, image, channel_name):
         start_time = aux.get_time_ms()
 
@@ -79,16 +94,8 @@ class ModuleBase():
         end_time = aux.get_time_ms()
 
         if (self.module_measurement):
-            if type(data) is not type(None):
-                modulename = str(type(self).__name__)
-                if 'time_statistics' not in data.keys():
-                    data['time_statistics'] = {}
-                if modulename not in data['time_statistics'].keys():
-                    data['time_statistics'][modulename]= {}
-                        
-                # separated time_statistics for processing time and time for the whole process
-                data['time_statistics'][modulename]["start_time"] = start_time
-                data['time_statistics'][modulename]["end_time"] = end_time
+            self.add_time_measurement(data, start_time, end_time)
+
         return data, image
 
     def update(self):
