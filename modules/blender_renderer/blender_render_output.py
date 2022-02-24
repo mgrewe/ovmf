@@ -14,15 +14,8 @@ from lib.auxiliary import get_time_ms
 #     new_rgb[higher] = (pow(new_rgb[higher], (1.0 / 2.4))) * 1.055 - 0.055
 #     new_rgb[lower] = 12.92 * new_rgb[lower]
 #     return new_rgb
-#adapted to numpy
 
-# def linear_to_srgb(linear):
-#     srgb = linear
-#     higher = linear > 0.0031308
-#     lower  = linear < 0.0031308
-#     srgb[higher] = (linear[higher]**(1.0/2.4)) * 1.05 - 0.05
-#     srgb[lower] = 12.92 * linear[lower]
-#     return srgb
+#adapted to numpy
 def linear_to_srgb(linear):
     srgb = linear
     higher = linear > 0.0031308
@@ -89,8 +82,6 @@ class BlenderRenderOutput(ModuleBase):
     def take_snapshot(self, data, measure_time = True):
 
         start = get_time_ms()
-
-        # self.area.tag_redraw()
 
         self.lock.acquire()
         
