@@ -19,32 +19,33 @@ class BlenderFexMMReceiver(ModuleBase):
     last_data = {}
 
 
-    def __init__(self, config, face_models_dict, fexmm_gaze_origin, **kwargs):
+    def __init__(self, config, avatar_models, fexmm_gaze_origin, **kwargs):
+        '''
+        avatar_models: list of collections, where each of collection contains an avatar
+        '''
 
         super().__init__(config, **kwargs)
 
-        if isinstance(face_models_dict,dict):
-            self.models = face_models_dict
-        else:
-            self.models = [ face_models_dict ]
-
+        self.models = list(avatar_models)
         self.fexmm_gaze_origin = fexmm_gaze_origin
         
         # Store initial values of models
-
-        for name, model in self.models.items():
+        for collection in self.models:
+            name = collection.name
+            model = collection.objects[name]
             self.initial_poses[name] = {}
             self.initial_poses[name]['location'] = model.location.copy()
             self.initial_poses[name]['rotation'] = model.rotation_euler.copy()
             self.initial_poses[name]['scale'] = model.scale.copy()
          
             self.initial_aus[name] = {}
-            for key, value in model.data.shape_keys.key_blocks.items():
-                self.initial_aus[name][key] = value.value
+            if model.data.shape_keys is not None:
+                for key, value in model.data.shape_keys.key_blocks.items():
+                    self.initial_aus[name][key] = value.value
 
         # Set first model as current model
         if len(self.models):
-            self.current_model_name = list(self.models)[0]
+            self.current_model_name = self.models[0].name
 
         # Show current model
         self.update_visibility()
@@ -81,12 +82,9 @@ class BlenderFexMMReceiver(ModuleBase):
         if channel_name != 'fexmm_parameters':
             return None, None
 
-        # 'fexmm_parameters' in self.sock:
-        # 'fexmm_animation' in self.sock:
-
-        if data and self.current_model_name:
+        model = self.get_current_model()
+        if data and model:
             # get and set for current model only
-            model = self.models[self.current_model_name]
 
             model.scale = self.scale
             
@@ -97,10 +95,10 @@ class BlenderFexMMReceiver(ModuleBase):
             if 'rotation' in data.keys():
                 model.rotation_euler = np.array(data['rotation']) + np.array(self.rotation_offset)
             
-            if 'shapekeys' in data.keys():
+            if model.data.shape_keys is not None and 'shapekeys' in data.keys():
                 for key, value in data['shapekeys'].items():
-                    #print('Setting shape key %s to %f' % (key, value))
-                    model.data.shape_keys.key_blocks[key].value = value
+                    if key in model.data.shape_keys.key_blocks.keys():
+                        model.data.shape_keys.key_blocks[key].value = value
             
             self.last_data = data
 
@@ -132,13 +130,18 @@ class BlenderFexMMReceiver(ModuleBase):
 
 
     def update_visibility(self):
-        print(self.current_model_name)
-        for name, model in self.models.items():
+        for model in self.models:
+            name = model.name
             if name == self.current_model_name:
-                print(name)
                 bpy.data.collections[name].hide_viewport = False;
             else:
                 bpy.data.collections[name].hide_viewport = True;
+
+    def get_current_model(self):
+        for collection in self.models:
+            if collection.name == self.current_model_name:
+                return collection.objects[self.current_model_name]
+        return None
 
 if __name__ == '__main__': 
     
