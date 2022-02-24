@@ -30,12 +30,11 @@ class Proc(ProcessBase):
         img.setAutoDraw(False)
         img.interpolate = True
 
-        vm_interface.set_avatar('FexMM') 
         vm_interface.set_delay(0)
 
         while True:
 
-            vm_interface.receive_and_set_image(img)
+            vm_interface.receive_and_set_image(img,fill_color='gray')
 
             # Trigger redraw
             img.draw()
