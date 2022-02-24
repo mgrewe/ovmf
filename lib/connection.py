@@ -7,7 +7,6 @@ import threading
 import queue
 import numpy as np
 import zmq
-import cv2
 sys.path.append(str(pl.Path(__file__).resolve().parents[0]))
 
 # The threshold of pixels before images are compressed as jpeg before passing them between pocesses, -1 dactivates compression
@@ -46,6 +45,7 @@ class _Receiver:
 					image = None
 				else:
 					if 'image_compressed' in data and data["image_compressed"] == 1:
+						import cv2
 						image = cv2.imdecode(np.frombuffer(msg[1].buffer, np.uint8), cv2.IMREAD_UNCHANGED)
 					else:
 						image = np.frombuffer(msg[1].buffer, np.uint8).reshape(data['image_shape'])
@@ -127,6 +127,7 @@ class _Sender:
 				msg["image_compressed"] = 0
 				image_in_bytes = img.tobytes()
 			else:
+				import cv2
 				msg["image_compressed"] = 1
 				_, image_in_bytes = cv2.imencode('.jpg', img, [int(cv2.IMWRITE_JPEG_QUALITY), 25])
 
