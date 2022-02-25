@@ -11,4 +11,5 @@ dependencies:
   - dlib-cpp=19.22
   - scipy=1.7
   - pyzmq=22.3
+  - pillow
   - psychopy
