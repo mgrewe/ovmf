@@ -53,10 +53,8 @@ Now, everything should be readily prepared such that you can start the OVMF via:
 
     python start.py -p example
 
-
-bat file
-close by typing q + enter
-
+The OVMF should not start with a Blender and a PsychoPy window showing an example scene. 
+Please refer to this [section](#download-avatar-model) to learn how to obtain the FexMM avatars.
 
 # Walk-Through Installation
 
@@ -128,7 +126,7 @@ conda activate ovmf
 
 ## Openface
 
-Download pretrained detector models.
+Download pretrained detector models. Users of ```Anaconda Powershell Prompt``` need to write ```curl.exe```
 
 ```
 curl -L https://www.dropbox.com/s/7na5qsjzz8yfoer/cen_patches_0.25_of.dat -o contrib/OpenFace/lib/local/LandmarkDetector/model/patch_experts/cen_patches_0.25_of.dat
