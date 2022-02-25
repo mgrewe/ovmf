@@ -59,7 +59,7 @@ The OVMF should start a Blender and a PsychoPy window showing an example scene l
 
 ![Example Scene](data/CubeFace.jpg)
 
-Learn how to obtain the FexMM avatars [here](README.md#download-avatar-model).
+Learn how to obtain the FexMM avatars [here](README.md#get-avatars).
 
 # 2. Advanced Installation
 
@@ -172,7 +172,7 @@ Below the OVMF directory, relative paths can be used, e.g.,
 
 ## 2.7 Start OVMF
 
-Now, everything should be setup. Run the example as described [here](#6-start-ovmf).
+Now, everything should be setup. Run the example as described [here](#16-start-ovmf).
 
 
 
