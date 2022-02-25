@@ -50,7 +50,7 @@ window size
 
 
 
-# OVMF Avatars {#get-avatars}
+# OVMF Avatars
 
 The avatars used in our evaluation study of the OVMF were created with our 3D Facial Expression Morphable (FexMM).
 The FexMM may only be used for scientific purposes.
