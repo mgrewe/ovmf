@@ -44,7 +44,7 @@ Install required libraries with:
 
 ## 5. Download Blender/OpenFace Package
 
-Download the [ZIP package](https://cloud.zib.de/s/tqTmrgP9LfDqSKG) and extract it into ```ovmf\contrib```. 
+Download the [ZIP package](https://cloud.zib.de/s/tqTmrgP9LfDqSKG/download/Blender_OpenFace_Binary_Package_1.zip) and extract it into ```ovmf\contrib```. 
 It should now contain two directories, i.e., ```Blender```  and ```OpenFace```.
 
 ## 6. Start OVMF
