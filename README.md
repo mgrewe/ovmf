@@ -60,4 +60,4 @@ To obtain the avatars, please read and sign the [license agreement](data/fexmm_l
 
 More details on the FexMM can be found here:
 
-> Grewe, C.M., Liu, T., Kahl, C.A., Hildebrandt, A., & Zachow, S. Statistical Learning of Facial Expressions Improves Realism of Animated Avatar Faces. Frontiers in Virtual Reality (2021)
+> Grewe, C.M., Liu, T., Kahl, C.A., Hildebrandt, A., & Zachow, S. Statistical Learning of Facial Expressions Improves Realism of Animated Avatar Faces. Frontiers in Virtual Reality (2021) https://doi.org/10.3389/frvir.2021.619811
