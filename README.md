@@ -56,6 +56,8 @@ The avatars used in our evaluation study of the OVMF were created with our 3D Fa
 The FexMM may only be used for scientific purposes.
 To obtain the avatars, please read and sign the [license agreement](data/fexmm_license_agreement.pdf) and send it to us.
 
+![Avatar faces](./data/avatars.jpg)
+
 More details on the FexMM can be found here:
 
 > Grewe, C.M., Liu, T., Kahl, C.A., Hildebrandt, A., & Zachow, S. Statistical Learning of Facial Expressions Improves Realism of Animated Avatar Faces. Frontiers in Virtual Reality (2021)
