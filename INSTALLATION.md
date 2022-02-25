@@ -1,7 +1,67 @@
-# 1. Setup Environment
+# Installation of the OVMF
+
+We provide two ways of installing OVMF on your computer:
+
+1. [Easy method](#easy-installation-for-windows): Step-by-step installation that uses a binary package created by us. This method works is for Windows only. 
+
+2. [Walk-through method](#walk-through-installation): Installation which requires preparation of Blender and compilation of OpenFace. This has been tested on Windows and Linux systems.
+
+
+# Easy Installation for Windows
+
+Please follow the instructions step-by-step.
+## 1. Install Software Libraries
+
+If not installed on your system, please download and install the following packages.
+
+- [Microsoft VC Runtime Libraries (16)](https://aka.ms/vs/16/release/vc_redist.x64.exe).
+- [Miniconda 64-Bit](https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe). Alternatively, you can use full [Anaconda 64-Bit](https://www.anaconda.com/download/). 
+For more information check [this guide](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
+
+
+## 2. Setup Conda environment
+
+Open the ```Anaconda Prompt``` from the start menu. It will typically open in your user's home directory, e.g., ```c:\Users\mgrewe```. You can change to a different directory or just install the OVMF there. 
+
+To prepare and activate a conda environment, type the following lines into the ```Anaconda Prompt```:
+
+    conda create -n ovmf python=3.9
+    conda activate ovmf
+    conda install git git-lfs
+
+## 3. Clone OVMF repository
+
+Now, clone the git repository by execution of:
+
+    git clone https://github.com/mgrewe/ovmf.git
+
+## 4. Update Conda environment
+
+Install required libraries with:
+
+    cd ovmf
+    conda env update -f .\environment.yml -n ovmf
+
+## 5. Download Blender/OpenFace Package
+
+Download the [ZIP package](https://cloud.zib.de/s/tqTmrgP9LfDqSKG) and extract it into ```ovmf\contrib```. 
+It should now contain two directories, i.e., ```Blender```  and ```OpenFace```.
+
+## 6. Start OVMF
+
+Now, everything should be readily prepared such that you can start the OVMF via:
+
+    python start.py -p example
+
+
+bat file
+close by typing q + enter
+
+
+# Walk-Through Installation
 
 ## Blender
-Download [Blender](https://www.blender.org/download/), we recommend to use the portable version.
+Download [Blender](https://www.blender.org/download/), we recommend using the portable version.
 
 ### Windows
 Install ZeroMQ into Python bundled with blender:
