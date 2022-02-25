@@ -7,10 +7,10 @@ We provide two ways of installing OVMF on your computer:
 2. [Advanced method](#advanced-installation): Advanced installation including preparation of Blender and compilation of OpenFace. This works for Windows and Linux systems.
 
 
-# Easy Installation for Windows
+# 1. Easy Installation for Windows
 
 Please follow the instructions step-by-step.
-## 1. Install software libraries
+## 1.1 Install software libraries
 
 If not installed on your system, please download and install the following packages.
 
@@ -20,7 +20,7 @@ Alternatively, you can use full [Anaconda 64-Bit](https://www.anaconda.com/downl
 For more information check [this guide](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
 
 
-## 2. Setup Conda environment
+## 1.2 Setup Conda environment
 
 Open the `Anaconda Prompt` from the start menu. It will typically open in your user's home directory, e.g., `c:\Users\mgrewe`. You can change to a different directory or just install the OVMF there. 
 
@@ -30,25 +30,25 @@ To prepare and activate a conda environment, type the following lines into the `
     conda activate ovmf
     conda install git git-lfs
 
-## 3. Clone OVMF repository
+## 1.3 Clone OVMF repository
 
 Now, clone the git repository by execution of:
 
     git clone https://github.com/mgrewe/ovmf.git
 
-## 4. Update Conda environment
+## 1.4 Update Conda environment
 
 Install required libraries with:
 
     cd ovmf
     conda env update -f .\environment.yml -n ovmf
 
-## 5. Download Blender/OpenFace package
+## 1.5 Download Blender/OpenFace package
 
 Download the [ZIP package](https://cloud.zib.de/s/tqTmrgP9LfDqSKG/download/Blender_OpenFace_Binary_Package_1.zip) and extract it into `ovmf\contrib`. 
 It should now contain two directories, i.e., `Blender`  and `OpenFace`.
 
-## 6. Start OVMF
+## 1.6 Start OVMF
 
 Now, everything should be readily prepared such that you can start the OVMF via:
 
@@ -60,12 +60,12 @@ The OVMF should start a Blender and a PsychoPy window showing an example scene l
 
 Learn how to obtain the FexMM avatars [here](README.md#download-avatar-model).
 
-# Advanced Installation
+# 2. Advanced Installation
 
 This walk-through installation will show you how to set up the OVMF with an original version of Blender and the source code of OpenFace.
 This method has been tested on Windows and Linux.
 
-## 1. Install compiler and build tools
+## 2.1 Install compiler and build tools
 
 We will now set up a working build tool chain for the compilation of OpenFace.
 
@@ -82,14 +82,14 @@ E.g., in Ubuntu simply run:
     sudo apt-get install build-essential
 
 
-## 2. Install Conda
+## 2.2 Install Conda
 
 Download and install [Miniconda 64-Bit](https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe).
 Alternatively, you can use full [Anaconda 64-Bit](https://www.anaconda.com/download/). 
 For more information check [this guide](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
 
 
-## 3. Setup Conda environment and clone OVMF repository
+## 2.3 Setup Conda environment and clone OVMF repository
 
 Create a Conda environment for the OVMF and activate it:
 
@@ -112,7 +112,7 @@ Then run:
 
     conda env update -f environment.yml
 
-## 4. Configure and Build OpenFace
+## 2.4 Configure and Build OpenFace
 
 
 Download pretrained detector models (In `Anaconda Powershell Prompt`, you need to write `curl.exe`):
@@ -136,7 +136,7 @@ Then, configure and build Openface:
     cd ../../..
 
 
-## 5. Install Blender
+## 2.5 Install Blender
 Download the portable version of [Blender](https://www.blender.org/download/).
 Preferably, extract and move the files into the `ovmf/contrib/Blender` directory.
 
@@ -156,7 +156,7 @@ This can be done by opening a terminal in the Blender directory and executing th
     ./contrib/Blender/3.0/python/bin/python3.9 -m pip install pyzmq
 
 
-## 6. Configure OVMF
+## 2.6 Configure OVMF
 
 OVMF needs to know the location of Blender and OpenFace. 
 Adjust the paths in `ovmf/config/contrib.json` accordingly.
@@ -169,7 +169,7 @@ Below the OVMF directory, relative paths can be used, e.g.,
     }
 
 
-## 7. Start OVMF
+## 2.7 Start OVMF
 
 Now, everything should be setup. Run the example as described [here](#6-start-ovmf).
 
