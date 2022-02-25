@@ -2,9 +2,9 @@
 
 We provide two ways of installing OVMF on your computer:
 
-1. [Easy method](#easy-installation-for-windows): Step-by-step installation that uses a binary package created by us. This method works is for Windows only. 
+1. [Easy method](#easy-installation-for-windows): Step-by-step installation that uses a binary package created by us. This method works with Windows only. 
 
-2. [Walk-through method](#walk-through-installation): Installation which requires preparation of Blender and compilation of OpenFace. This has been tested on Windows and Linux systems.
+2. [Advanced method](#advanced-installation): Advanced installation including preparation of Blender and compilation of OpenFace. This works for Windows and Linux systems.
 
 
 # Easy Installation for Windows
@@ -60,7 +60,7 @@ The OVMF should start a Blender and a PsychoPy window showing an example scene l
 
 Learn how to obtain the FexMM avatars [here](README.md#download-avatar-model).
 
-# Walk-Through Installation
+# Advanced Installation
 
 This walk-through installation will show you how to set up the OVMF with an original version of Blender and the source code of OpenFace.
 This method has been tested on Windows and Linux.
