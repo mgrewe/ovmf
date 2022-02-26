@@ -21,23 +21,13 @@ Please refer to our BRM paper for more details and cite it if you are using our 
 
 # Installation
 
-We developed the OVMF for the Linux and Windows operating system, but it should be simple to use it on Mac, as well.
+We originally developed the OVMF for the Linux and Windows operating system, but it should be possible to use it on Mac, as well.
 Please refer to the [installation instructions](./INSTALLATION.md).
-
-
-
-
-
 
 
 # Usage
 
-# Extension
-
-Example module for expression amplification/attenuation
-
-
-# Start and usage
+![Demo](data/demo_tracking.gif)
 
 pipeline launch
 
@@ -46,9 +36,11 @@ minimization of window
 window size
 
 
-# Pipelines
+## Pipelines
 
+## Extension
 
+Example module for expression amplification/attenuation
 
 # OVMF Avatars
 
