@@ -17,4 +17,10 @@ class MyModuleClass(ModuleBase):
         return data, image
 
 
+    def process_control_commands(self, update, receiver_channel = ''):
+        # update contains a dict of parameters sent via the OVMF interface
+
+        # do process stuff - your code goes here!
+        pass
+
 Module = ProcessBase(MyModuleClass)

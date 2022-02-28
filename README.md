@@ -160,7 +160,7 @@ while True:
 PsychoPy can be started as a module directly by the OVMF (see [modules/external/psychopy_example.py](modules/external/psychopy_example.py)).
 Alternatively, the OVMF can also be started in the background while a separate PsychoPy session is used for every participant (see [modules/external/psychopy_example_standalone.py](modules/external/psychopy_example_standalone.py)).
 
-## Extension
+## OVMF Extension
 
 Our goal was to make the extension of the OVMF as convenient as possible.
 As explained in our paper, most basic functionality of the OVMF, including message passing etc., is encapsulated into a base class called [`ModuleBase`](lib/module_base.py), such that it can be hidden from the user.
@@ -199,9 +199,11 @@ Alternatively, OVMF also supports on-the-fly configuration of modules through th
 For instance, a user might want to change the expression scale between two trials within a PsychoPy experiment, similar of `set_delay` function in the [PsychoPy example](#psychopy-experiment).
 This can be achieved by overriding of the `process_control_commands` that receives all parameters in the `update` dictionary that were set via the generic `ovmf.Interface().set_parameter` function (see also [ovmf.py](modules/external/ovmf.py)).
 
+A template module can be found in [modules/template/mymodule.py](modules/template/mymodule.py).
+
 # Contribution
 
-You are warlmy welcome to contribute by sending pull requests or other improvements to us.
+You are warmly welcome to contribute by sending pull requests or other improvements to us.
 Please also have a look at the list of [TODOs](TODO.md).
 
 # OVMF Avatars
