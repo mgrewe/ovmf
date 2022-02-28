@@ -45,7 +45,7 @@
 	},
 
 	"blender_renderer": {
-		"file": "modules/blender_renderer/blender_renderer.py",
+		"file": "modules/blender/blender_renderer.py",
 		"use_sockets": true,
 		"queue_size": 1,
 		"blend": "",
@@ -53,14 +53,14 @@
 	},
 
 	"blender_render_output": {
-		"file": "modules/blender_renderer/blender_render_output.py",
+		"file": "modules/blender/blender_render_output.py",
 		"use_sockets": true,
 		"queue_size": 1,
 		"address": "tcp://127.0.0.1:424242"
 	},
 
-	"psychopy_display": {
-		"file": "modules/psychopy_display/display_avatar.py"
+	"psychopy_example": {
+		"file": "modules/external/psychopy_example.py"
 	},
 
 	"control_commands": {

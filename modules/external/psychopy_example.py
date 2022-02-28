@@ -8,7 +8,7 @@ dir = str(Path(__file__).resolve().parents[2])
 
 if not dir in sys.path:
     sys.path.append(dir)
-import modules.psychopy_display.ovmf as ovmf
+import modules.external.ovmf as ovmf
 from lib.module_base import ProcessBase
 
 

@@ -33,13 +33,13 @@
 
 	"blender_renderer": {
 		"blend": "data/CubeFace.blend",
-		"init": "modules/blender_renderer/blender_avatar.py",
+		"init": "modules/blender/blender_avatar.py",
 		"receive": {
 			"fexmm_parameters": "openface_to_fexmm_remapper"
 		}
 	},
 
-	"psychopy_display": {
+	"psychopy_example": {
 		"receive" : {
 			"render_output": "blender_renderer"
 		}
