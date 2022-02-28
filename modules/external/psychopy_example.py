@@ -31,6 +31,9 @@ class Proc(ProcessBase):
         img.interpolate = True
 
         vm_interface.set_delay(0)
+        vm_interface.set_parameter({
+            'expressionscaling_au_scale':0
+        })
 
         while True:
 

@@ -7,7 +7,7 @@
 		"width": 640,
 		"height": 480,
 		"fourcc": "MJPG",
-		"fps": 120,
+		"fps": 60,
 		"scale": 1.0,
 		"delay": 0,
 		"capture_thread": false
@@ -48,6 +48,13 @@
 		"file": "modules/utils/delay.py",
 		"use_sockets": true,
 		"queue_size": 1
+	},
+
+	"expression_scaling": {
+		"file": "modules/utils/expression_scaling.py",
+		"use_sockets": true,
+		"queue_size": 1,
+		"expressionscaling_au_scale": 0.5
 	},
 
 	"blender_renderer": {
