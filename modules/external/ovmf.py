@@ -40,14 +40,14 @@ class Interface:
                 print("Avatar class is view-only. Can't change parameters.")
             return True
 
-    def set_parameter(self, params_dict):
+    def set_parameter(self, update):
         '''
         Set generic parameters in form of a dictionary. 
         Look at the modules for supported parameters.
         '''
         if self.debug:
-            print("Parameter: " + str(params_dict))
-        self.commands.send(params_dict)
+            print("Parameter: " + str(update))
+        self.commands.send(update)
 
     def set_delay(self, delay_seconds = 0):
         '''
