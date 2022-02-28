@@ -206,7 +206,7 @@ A template module can be found in [modules/template/mymodule.py](modules/templat
 You are warmly welcome to contribute by sending pull requests or other improvements to us.
 Please also have a look at the list of [TODOs](TODO.md).
 
-# OVMF Avatars
+# FexMM Avatars
 
 The avatars used in our evaluation study of the OVMF were created with our 3D Facial Expression Morphable (FexMM).
 The FexMM may only be used for scientific purposes.
