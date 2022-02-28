@@ -15,8 +15,7 @@ class Interface:
     '''
     Python Interface to the Open Virtual Mirror Framework
 
-    Please see display_avatar*.py for examples how to use the interface 
-    in your Psychopy experiments.
+    Please see psychopy_example.py
     '''
 
     def __init__(self, view_only = False, debug = True, pipeline=None):
@@ -50,30 +49,30 @@ class Interface:
             print("Parameter: " + str(params_dict))
         self.commands.send(params_dict)
 
-    def set_delay(self, delay = 0):
+    def set_delay(self, delay_seconds = 0):
         '''
-        Set the avatar motion delay in millisecs
+        Set the avatar motion delay in seconds
         '''
 
         if self.check_view_only():
             return
 
         params = {
-            'buffer_delay' : float(delay)
+            'delay' : float(delay_seconds) * 1000
         }
         self.set_parameter(params)
 
-    def set_avatar(self, avatar = 'female'):
+    def set_avatar(self, avatar_name = 'FexMM'):
 
         if self.check_view_only():
             return
 
         params = {
-            'display_avatar' : avatar
+            'avatar_name' : avatar_name
         }
         self.set_parameter(params)
 
-    def set_scale(self, scale = 1.0):
+    def set_scale(self, avatar_scale = 1.0):
         '''
         set avatar uniform scale in 3d
         '''
@@ -82,11 +81,11 @@ class Interface:
             return
 
         params = {
-            'display_scale' : scale
+            'avatar_scale' : avatar_scale
         }
         self.set_parameter(params)
 
-    def set_depth_scale(self, depth_scale = 1.0):
+    def set_depth_scale(self, avatar_depth_scale = 1.0):
         '''
         set avatar depth scale factor
         '''
@@ -95,11 +94,11 @@ class Interface:
             return
 
         params = {
-            'display_depth_scale' : depth_scale
+            'avatar_depth_scale' : avatar_depth_scale
         }
         self.set_parameter(params)
 
-    def set_location_offset(self, location_offset = [0,0,0]):
+    def set_location_offset(self, avatar_location_offset = [0,0,0]):
         '''
         set avatar location offset (before application of scale factor)
         '''
@@ -108,11 +107,11 @@ class Interface:
             return
 
         params = {
-            'display_location_offset' : location_offset
+            'avatar_location_offset' : avatar_location_offset
         }
         self.set_parameter(params)
 
-    def set_rotation_offset(self, rotation_offset = [0,0,0]):
+    def set_rotation_offset(self, avatar_rotation_offset = [0,0,0]):
         '''
         set avatar rotation offset (before application of scale factor)
         '''
@@ -121,11 +120,11 @@ class Interface:
             return
 
         params = {
-            'display_rotation_offset' : rotation_offset
+            'avatar_rotation_offset' : avatar_rotation_offset
         }
         self.set_parameter(params)
 
-    def set_gaze_offset(self, offset = [0,0] ):
+    def set_gaze_offset(self, gaze_offset = [0,0] ):
         '''
         set avatar gaze offset relative to the screen midpoint in blender units
         '''
@@ -134,8 +133,8 @@ class Interface:
             return
 
         params = {
-            'display_gaze_offset_x' : offset[0],
-            'display_gaze_offset_y' : offset[1]
+            'avatar_gaze_offset_x' : gaze_offset[0],
+            'avatar_gaze_offset_y' : gaze_offset[1]
         }
         self.set_parameter(params)
 

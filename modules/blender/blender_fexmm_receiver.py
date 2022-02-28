@@ -52,29 +52,29 @@ class BlenderFexMMReceiver(ModuleBase):
 
 
     def process_control_commands(self, update, receiver_channel = ''):
-        if 'display_avatar' in update:
-            if update['display_avatar'] in self.models:
-                self.current_model_name = update['display_avatar']
+        if 'avatar_name' in update:
+            if update['avatar_name'] in self.models:
+                self.current_model_name = update['avatar_name']
             else:
                 self.current_model_name = None
             self.update_visibility()
-        if 'display_scale' in update:
-            scalefac = float(update['display_scale'])
+        if 'avatar_scale' in update:
+            scalefac = float(update['avatar_scale'])
             self.scale = [scalefac, scalefac, scalefac]
-        if 'display_gaze_offset_x' in update:
-            gaze_offset_x = float(update['display_gaze_offset_x'])
+        if 'avatar_gaze_offset_x' in update:
+            gaze_offset_x = float(update['avatar_gaze_offset_x'])
             self.fexmm_gaze_origin.location[0] = gaze_offset_x
-        if 'display_gaze_offset_y' in update:
-            gaze_offset_y = float(update['display_gaze_offset_y'])
+        if 'avatar_gaze_offset_y' in update:
+            gaze_offset_y = float(update['avatar_gaze_offset_y'])
             self.fexmm_gaze_origin.location[1] = gaze_offset_y
-        if 'display_depth_scale' in update:
-            depth_scale = float(update['display_depth_scale'])
+        if 'avatar_depth_scale' in update:
+            depth_scale = float(update['avatar_depth_scale'])
             self.set_depth_scale(depth_scale) 
-        if 'display_location_offset' in update:
-            location_offset = np.array(update['display_location_offset'], dtype = np.float)
+        if 'avatar_location_offset' in update:
+            location_offset = np.array(update['avatar_location_offset'], dtype = np.float)
             self.set_location_offset(location_offset) 
-        if 'display_rotation_offset' in update:
-            rotation_offset = np.array(update['display_rotation_offset'], dtype = np.float)
+        if 'avatar_rotation_offset' in update:
+            rotation_offset = np.array(update['avatar_rotation_offset'], dtype = np.float)
             self.set_rotation_offset(rotation_offset) 
 
     def process(self, data, image = None, channel_name = ''):

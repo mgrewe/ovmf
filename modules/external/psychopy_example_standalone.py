@@ -1,7 +1,11 @@
 from psychopy import visual, core
 import ovmf
 
-vm_interface = ovmf.Interface(view_only=False)
+
+# Create the virtual mirror interface
+vm_interface = ovmf.Interface()
+# Set 
+vm_interface.set_delay(2)
 
 win = visual.Window(
     size=[1088, 728],
@@ -12,11 +16,7 @@ win = visual.Window(
 
 img = visual.ImageStim(win, units = 'pix')
 img.size = [640, 480]
-img.setAutoDraw(False)
-img.interpolate = True
-
-vm_interface.set_avatar('FexMM') 
-vm_interface.set_delay(0)
+img.setAutoDraw(True)
 
 while True:
 
