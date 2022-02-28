@@ -25,9 +25,15 @@
 		}
 	},
 
+	"delay": {
+		"receive":{
+			"tracker_parameters": "openface_smoother"
+		}
+	},
+
 	"openface_to_fexmm_remapper": {
 		"receive" : {
-			"tracker_parameters": "openface_smoother"
+			"tracker_parameters": "delay"
 		}
 	},
 
