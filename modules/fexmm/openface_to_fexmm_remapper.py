@@ -34,7 +34,7 @@ class OpenFaceToFexMMRemapper(ModuleBase):
             'AU20': ('AU_20', 1),
             'AU23': ('AU_23', 1),
             'AU25': ('AU_25', 1),
-            'AU26' : ('AU_26', 2)
+            'AU26' : ('AU_26', 1.5)
             #'AU28' NA
             }
     
