@@ -113,9 +113,9 @@ Each module receives data from previous modules through channels as specified in
 A module can have multiple receiver channels as in the `image_preview`.
 Each channel has a name, e.g., `image_data`, and the name of the previous module, e.g., `webcam_input`.
 
-Each module can be configured with additional parameters.
+The modules can be configured with additional parameters.
 For instance, `send_image` specifies whether the webcam image is forwarded to subsequent modules. 
-Setting this parameter to `false` saves time and reduces latency, but later modules will not be able to process the webcam image.
+Setting this parameter to `false` saves time and reduces latency, but later modules will only receive a `None` image.
 In the example above, modules after `openface_tracker` only process the tracked parameters such that the image can be safely discarded.
 
 An overview about the modules and parameters is given in [`config/modules.json`](config/modules.json).
