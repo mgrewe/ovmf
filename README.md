@@ -2,15 +2,15 @@
 
 
 The Open Virtual Mirror Framework (OVMF) is a toolbox for virtual mirror experiments developed by the [Computational Diagnosis and Therapy Planning Group](https://www.zib.de/visual/therapy-planning) at the Zuse Institute Berlin.
-It is intended for psychological research on enfacement and beyond.
+It is mainly intended for psychological research on enfacement and beyond.
 The OVMF can track a large range of facial movements, including head pose and facial expressions.
 The tracked movements can be manipulated on-the-fly and used to animate realistic avatar faces.
 
 
 ![A virtual mirror experiment created with the OVMF](./data/framework.jpg)
+![Demo](data/demo_tracking.gif)
 
-
-Our goal is to make the usage of the OVMF as simple as possible:
+Our goal is to make the usage of the OVMF as simple as possible.
 
 - The OVMF can run on standard computer hardware with a low latency.
 - It interfaces with existing software for psychological experimentation like PsychoPy.
@@ -20,8 +20,8 @@ Our goal is to make the usage of the OVMF as simple as possible:
 
 
 The OVMF and third party software (e.g., [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace/) and [Blender](https://www.blender.org/)) are open source.
-This fosters sustainability, extensibility, and replicability in enfacement research.
-A detailed description of the OVMF can be found in paper. Please cite it if you are using our work. 
+This fosters sustainability, extensibility, and replicability of enfacement research.
+A detailed description of the OVMF can be found in our BRM paper. Please cite it if you are using our work. 
 
 > Grewe, C.M., Liu, T., Hildebrandt, A., & Zachow, S. *The Open Virtual Mirror Framework for enfacement illusions. Enhancing the sense of agency with avatars that imitate facial expressions.* Behavior Research Methods (2022) https://doi.org/10.3758/s13428-021-01761-9
 
@@ -36,15 +36,16 @@ Both projects are part of the Special Priority Programme [The Active Self](http:
 
 # Installation
 
-We originally developed the OVMF for the Linux and Windows operating systems, but it should be possible to use it on Mac as well.
+We originally developed the OVMF for the Linux and Windows operating systems, but it should be simply possible to use it on Mac as well.
 Please refer to the [installation instructions](./INSTALLATION.md).
 
 
 # Usage
 
-The OVMF is designed to 
+The OVMF has been implemented in Python.
+For convenient usage, we 
 
-![Demo](data/demo_tracking.gif)
+
 
 
 
