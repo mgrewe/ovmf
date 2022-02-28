@@ -58,7 +58,7 @@ class Interface:
             return
 
         params = {
-            'delay' : float(delay_seconds) * 1000
+            'delay_ms' : float(delay_seconds) * 1000
         }
         self.set_parameter(params)
 

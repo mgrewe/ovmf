@@ -11,8 +11,8 @@ class Delay(ModuleBase):
 
     def process_control_commands(self, data, receiver_channel = ''):
         if data is not None:
-            if 'delay' in data:
-                self.delay_in_ms = data['delay']
+            if 'delay_ms' in data:
+                self.delay_in_ms = data['delay_ms']
 
     def process(self, data, image, receiver_channel = ''):
         
