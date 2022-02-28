@@ -10,6 +10,7 @@ This document lists the TODOs for future development.
 
 # Intermediate
 
+- Documentation of control commands
 - Configuration of webcam parameters by the webcam_input module
 
 # Less important
