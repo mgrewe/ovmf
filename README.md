@@ -109,8 +109,8 @@ The file has a simple format:
 This pipeline contains the 6 modules of a simple virtual mirror experiment, i.e., (1) webcam capture, (2) face tracking, (3) image preview, (4) delay, (5) parameter remapping, (6) rendering.
 The first value determines the type of module, e.g., `webcam_input`.
 
-Each module receives data from previous modules through input channels as specified in the `receive` array. 
-A module can have multiple input channels as in the `image_preview`.
+Each module receives data from previous modules through channels as specified in the `receive` array. 
+A module can have multiple receiver channels as in the `image_preview`.
 Each channel has a name, e.g., `image_data`, and the name of the previous module, e.g., `webcam_input`.
 
 Each module can be configured with additional parameters.
@@ -119,6 +119,9 @@ Setting this parameter to `false` saves time and reduces latency, but later modu
 In the example above, modules after `openface_tracker` only process the tracked parameters such that the image can be safely discarded.
 
 An overview about the modules and parameters is given in [`config/modules.json`](config/modules.json).
+Note that the parameters in this file are specified system-wide.
+This is typically fine for the webcam device, but different pipelines may require different parameters.
+The system-wide parameters can thus be overridden for each pipeline in the corresponding JSON file (e.g., `send_image` option in the example above.)
 
 ## PsychoPy Experiment
 
@@ -159,7 +162,42 @@ Alternatively, the OVMF can also be started in the background while a separate P
 
 ## Extension
 
-Example module for expression amplification/attenuation
+Our goal was to make the extension of the OVMF as convenient as possible.
+As explained in our paper, most basic functionality of the OVMF, including message passing etc., is encapsulated into a base class called [`ModuleBase`](lib/module_base.py), such that it can be hidden from the user.
+I.e., a module for the scaling of the tracked expression movements is as simple as
+
+```python
+from lib.module_base import ModuleBase, ProcessBase
+
+class ExpressionScaling(ModuleBase):
+
+    def __init__(self, config, **kwargs):
+        super().__init__(config, **kwargs)
+        self.au_scale = config['expressionscaling_au_scale']
+
+
+    def process(self, data, image, receiver_channel):
+        if 'au' in data.keys():
+            for key, value in data['au'].items():
+                data['au'][key] = self.au_scale * value
+        return data, image
+
+
+    def process_control_commands(self, update, receiver_channel):
+        if 'expressionscaling_au_scale' in update:
+            self.au_scale = float(update['expressionscaling_au_scale'])
+        
+
+Module = ProcessBase(ExpressionScaling)
+```
+
+New functionality can be simply implemented by overriding of the `process` method.
+The example shows how the values in the data dictionary are scaled by the factor names `au_scale`.
+It can be set once at creation of the module via the system-wide or pipeline parameters (e.g., via specification in `modules.json` or `example.json`).
+
+Alternatively, OVMF also supports on-the-fly configuration of modules through the interface.
+For instance, a user might want to change the expression scale between two trials within a PsychoPy experiment, similar of `set_delay` function in the [PsychoPy example](#psychopy-experiment).
+This can be achieved by overriding of the `process_control_commands` that receives all parameters in the `update` dictionary that were set via the generic `ovmf.Interface().set_parameter` function (see also [ovmf.py](modules/external/ovmf.py)).
 
 # Contribution
 
