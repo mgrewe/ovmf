@@ -179,7 +179,7 @@ Now, everything should be setup. Run the example as described [here](#16-start-o
 
 # 3. Webcam Setup
 
-A good configuration of the webcam is of great importance. 
+The configuration of the webcam is of great importance. 
 The camera's parameters significantly effect the end-to-end latency and the tracking performance. 
 For a well-working setup, it might be necessary to tune the parameters of the specific hardware and lab environment.
 
