@@ -187,7 +187,8 @@ Most webcams, like the Logitech Brio used in our experiments, allow the user to 
 However, the number of parameters and the interpretation of the values may vary between vendors and models. 
 Please refer to the documentation of your webcam for more details.
 
-We are currently working on exposure of common parameters to the user via the configuration files.
+We are currently working on adjustment of common parameters via the configuration files.
+Please have a look at the `webcam_input` section in [config/modules.json](config/modules.json) for currently supported parameters.
 
 ## Exposure Time
 
