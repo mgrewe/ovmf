@@ -1,13 +1,12 @@
 {
-	"input_webcam": {
-		"scale": 0.5,
+	"webcam_input": {
 		"delay": 0,
 		"fps": 120
 	},
 
 	"image_preview": {
 		"receive":{
-			"image_data": "input_webcam",
+			"image_data": "webcam_input",
 			"tracker_parameters": "openface_tracker"
 		}
 	},
@@ -15,7 +14,7 @@
 	"openface_tracker": {
 		"send_image": false,
 		"receive":{
-			"image_data": "input_webcam"
+			"image_data": "webcam_input"
 		}
 	},
 

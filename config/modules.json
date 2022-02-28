@@ -1,6 +1,6 @@
 {
-	"input_webcam":{
-		"file": "modules/input/input_webcam.py",
+	"webcam_input":{
+		"file": "modules/input/webcam_input.py",
 		"use_sockets": true,
 		"queue_size": 1,
 		"device": 0,
@@ -9,7 +9,7 @@
 		"fourcc": "MJPG",
 		"fps": 120,
 		"scale": 1.0,
-		"delay": 60,
+		"delay": 0,
 		"capture_thread": false
 	},
 
@@ -31,15 +31,21 @@
 		"use_sockets": true,
 		"queue_size": 1
 	},
-
+	
 	"openface_service": {
 		"file": "modules/openface/openface_service.py",
 		"use_sockets": true,
 		"queue_size": 1
 	},
-
+	
 	"openface_smoother": {
 		"file": "modules/openface/openface_smoother.py",
+		"use_sockets": true,
+		"queue_size": 1
+	},
+	
+	"delay": {
+		"file": "modules/utils/delay.py",
 		"use_sockets": true,
 		"queue_size": 1
 	},

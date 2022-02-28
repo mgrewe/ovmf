@@ -10,7 +10,7 @@ USE_SELF_ESTIMATED_TIMESTAMP = True
 
 # TODO: Print out FOURCC code instead of number
 
-class InputWebcam(ModuleBase):
+class WebcamInput(ModuleBase):
 
     camera = None
     scale = 1
@@ -43,7 +43,7 @@ class InputWebcam(ModuleBase):
         self.scale = float(config["scale"])
         self.delay = float(config["delay"])
 
-        self.intrinsics = InputWebcam.guessIntrinsics(self.scale * self.camera.get(cv2.CAP_PROP_FRAME_WIDTH),
+        self.intrinsics = WebcamInput.guessIntrinsics(self.scale * self.camera.get(cv2.CAP_PROP_FRAME_WIDTH),
                         self.scale * self.camera.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
         print("Camera " + str(config["device"]) + " opened with:")
@@ -129,4 +129,4 @@ class InputWebcam(ModuleBase):
 
         return (fx, fy, cx, cy)
 
-Module = ProcessBase(InputWebcam)
+Module = ProcessBase(WebcamInput)
