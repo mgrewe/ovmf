@@ -182,30 +182,53 @@ Now, everything should be setup. Run the example as described [here](#16-start-o
 The configuration of the webcam is of great importance. 
 The camera's parameters significantly effect the end-to-end latency and the tracking performance. 
 For a well-working setup, it might be necessary to tune the parameters of the specific hardware and lab environment.
+For best results, light the lab as brightly as possible.
 
 Most webcams, like the Logitech Brio used in our experiments, allow the user to control various parameters. 
 However, the number of parameters and the interpretation of the values may vary between vendors and models. 
 Please refer to the documentation of your webcam for more details.
 
-We are currently working on adjustment of common parameters via the configuration files.
-Please have a look at the `webcam_input` section in [config/modules.json](config/modules.json) for currently supported parameters.
+## Parameter Configuration
+
+We provide the ability to set a number of parameters system-wide via [config/modules.json](config/modules.json), or specifically for each pipeline in their respective JSON files.
+The adjustment of each parameter by the OVMF can be deactivated by with the special value `null`.
+This way, the current camera configuration is used.
+All other values will be set during starting of the `webcam_input` module.
+
+Windows and Linux provide tools which allow live tuning of the parameters during operation of the OVMF. 
+For Windows, you can take advantage of a configuration dialog that will be shown during startup of the OVMF by setting `"win_props_dialog": true`.
+For Linux, we will give examples for the usage of the command line tool `v4l2-ctl` below.
+Please also refer to these tools for the valid ranges of the parameter values.
+
 
 ## Exposure Time
 
-One major parameter is the camera's exposure time, i.e., the time that is needed to capture an image. 
-The smaller it is, the lower the latency becomes.
+One important parameter is the camera's exposure time, i.e., the time that the sensor will be exposed to the light coming through the lens of the camera.
+The smaller it is, the faster an image is captured and the lower the latency becomes.
+However, short exposure times will also make the image darker.
 
-Linux users can use the command line tool `v4l2-ctl` for adjustment of most parameters during operation of the webcam.
-E.g., set exposure mode to manual and adjust the absolute time via
+Usually, webcams try to automatically adjust exposure time to the amount of light in the image.
+We recommend setting `"autoexposure": false` to deactivate dynamic adjustment and decrease latency.
+Instead, try to brightly light the lab and decrease exposure time as much as possible.
 
-    v4l2-ctl -d /dev/video0 -c auto_exposure=1 
-    v4l2-ctl -d /dev/video0 -c exposure_time_absolute=25
+Windows and Linux parametrize exposure time differently.
+The value of `"autoexposure"` in [config/modules.json](config/modules.json) is specified in milliseconds and correctly converted for each operating system.
 
-## Brightness and Contrast
+With `v4l2-ctl`, you can set exposure mode to manual and adjust the absolute time via
+
+    v4l2-ctl -d /dev/video0 -c auto_exposure=1 # deactivate auto exposure
+    v4l2-ctl -d /dev/video0 -c exposure_time_absolute=25 # corresponds to 2.5 msec
+
+You can also query the current parameters of a camera by
+
+    v4l2-ctl -d /dev/video0 --all
+
+## Gain, Brightness, and Contrast
 
 Adjustment of the exposure time also affects the brightness and the signal-to-noise ratio of the images.
 Short exposure times make the image appear darker.
-Most cameras allow to increase the gain (similar to the ISO setting of DSLRs), but the resulting images might be too noisy.
+The gain can be increased which amplifies the image intensities similar to the ISO of a DSLR.
+In consequence, the images become brighter but also more noisy.
 You need to find a good compromise between exposure time and image quality.
 
 Under Linux, you can try to play with gain, brightness, contrast, or other parameters, e.g.,
@@ -217,12 +240,11 @@ Under Linux, you can try to play with gain, brightness, contrast, or other param
 
 ## Autofocus
 
-Many cameras have an autofocus function. 
-It continuously adjusts the focus to maintain sharpness as the distance of the face to the camera changes. 
-In a lab setting, participants usually have a constant distance to the camera which allows to disable the feature. 
-This may reduce latency and avoid tracking problems when the re-focussing procedure causes blurry images.
+Most cameras focus automatically, i.e., it is continuously adjusted to maintain sharpness of the face as the distance to the camera changes. 
+In a lab setting, participants usually have a constant distance to the camera which allows to disable the feature via `"autofocus": false`.
+This may reduce latency and avoid tracking problems when blurry images occur during re-focussing.
 
-The focus and zoom can be set by
+The focus and zoom can also be set by
 
     v4l2-ctl -d /dev/video0 -c focus_automatic_continuous=0
     v4l2-ctl -d /dev/video0 -c focus_absolute=50 
@@ -232,8 +254,7 @@ The focus and zoom can be set by
 ## Other parameters
 
 Other parameters of webcams include automatic white balance, backlight compensation, etc.
-
-You can get a full list of the parameters using
+You can get a full list of the parameters in Window's configuration dialog or in Linux using
 
     v4l2-ctl -d /dev/video0 --all
 
