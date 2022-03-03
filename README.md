@@ -41,9 +41,11 @@ Refer to the [installation instructions](./INSTALLATION.md).
 
 # Usage and Extension
 
-Refer to [this document](./USAGE.md) for details on the usage and extension of the OVMF.
+1. Refer to [this document](./USAGE.md) for details on the usage and extension of the OVMF.
 
-Details on the calibration of a systems end-to-end latency can be found [here](./latency_calibration/README.md).
+2. Please also read about the [configuration of your webcam](./WEBCAM.md).
+
+3. Details on the calibration of a systems end-to-end latency can be found [here](./latency_calibration/README.md).
 
 # Contribution
 
