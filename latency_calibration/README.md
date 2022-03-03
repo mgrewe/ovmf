@@ -8,7 +8,7 @@ The Jupyter notebook can be found [Jupyter notebook](./end-to-end-latency.ipynb)
 
 The steps of the calibration procedure are:
 
-1. A video of an avatar doing a head turn as [here](./latency_calibration/head_turn.mp4) is prerecorded and continuously replayed.
+1. A video of an avatar doing a head turn as [here](./head_turn.mp4) is prerecorded and continuously replayed.
 
 2. The video is captured by the webcam which is used by the OVMF such that the tracked movements are transferred to a second avatar which is displayed on the screen, e.g., within PsychoPy.
 An example calibration pipeline can be found [here](../config/pipelines/latency_calibration.json). 
