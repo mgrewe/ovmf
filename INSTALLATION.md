@@ -6,7 +6,7 @@ We provide two ways of installing OVMF on your computer:
 
 2. [Advanced method](#advanced-installation): Advanced installation including preparation of Blender and compilation of OpenFace. This works for Windows and Linux systems.
 
-In the ned of this document, you find some information on [setting up your webcam](#3-webcam-setup) and [calibration of the system's end-to-end latency](#4-latency-calibration).
+In any case, be sure to read about the [configuration of your webcam](./WEBCAM.md).
 
 # 1. Easy Installation for Windows
 
@@ -173,122 +173,5 @@ Below the OVMF directory, relative paths can be used, e.g.,
 ## 2.7 Start OVMF
 
 Now, everything should be setup. Run the example as described [here](#16-start-ovmf).
-
-
-
-
-# 3. Webcam Setup
-
-The configuration of the webcam is of great importance. 
-The camera's parameters significantly effect the end-to-end latency and the tracking performance. 
-For a well-working setup, it might be necessary to tune the parameters of the specific hardware and lab environment.
-For best results, light the lab as brightly as possible.
-
-Most webcams, like the Logitech Brio used in our experiments, allow the user to control various parameters. 
-However, the number of parameters and the interpretation of the values may vary between vendors and models. 
-Please refer to the documentation of your webcam for more details.
-
-## Parameter Configuration
-
-We provide the ability to set a number of parameters system-wide via [config/modules.json](config/modules.json), or specifically for each pipeline in their respective JSON files.
-The adjustment of each parameter by the OVMF can be deactivated by with the special value `null`.
-This way, the current camera configuration is used.
-All other values will be set during starting of the `webcam_input` module.
-
-Windows and Linux provide tools which allow live tuning of the parameters during operation of the OVMF. 
-For Windows, you can take advantage of a configuration dialog that will be shown during startup of the OVMF by setting `"win_props_dialog": true`.
-For Linux, we will give examples for the usage of the command line tool `v4l2-ctl` below.
-Please also refer to these tools for the valid ranges of the parameter values.
-
-
-## Exposure Time
-
-One important parameter is the camera's exposure time, i.e., the time that the sensor will be exposed to the light coming through the lens of the camera.
-The smaller it is, the faster an image is captured and the lower the latency becomes.
-However, short exposure times will also make the image darker.
-
-Usually, webcams try to automatically adjust exposure time to the amount of light in the image.
-We recommend setting `"autoexposure": false` to deactivate dynamic adjustment and decrease latency.
-Instead, try to brightly light the lab and decrease exposure time as much as possible.
-
-Windows and Linux parametrize exposure time differently.
-The value of `"autoexposure"` in [config/modules.json](config/modules.json) is specified in milliseconds and correctly converted for each operating system.
-
-With `v4l2-ctl`, you can set exposure mode to manual and adjust the absolute time via
-
-    v4l2-ctl -d /dev/video0 -c auto_exposure=1 # deactivate auto exposure
-    v4l2-ctl -d /dev/video0 -c exposure_time_absolute=25 # corresponds to 2.5 msec
-
-You can also query the current parameters of a camera by
-
-    v4l2-ctl -d /dev/video0 --all
-
-## Gain, Brightness, and Contrast
-
-Adjustment of the exposure time also affects the brightness and the signal-to-noise ratio of the images.
-Short exposure times make the image appear darker.
-The gain can be increased which amplifies the image intensities similar to the ISO of a DSLR.
-In consequence, the images become brighter but also more noisy.
-You need to find a good compromise between exposure time and image quality.
-
-Under Linux, you can try to play with gain, brightness, contrast, or other parameters, e.g.,
-
-    v4l2-ctl -d /dev/video0 -c gain=150
-    v4l2-ctl -d /dev/video0 -c brightness=200 
-    v4l2-ctl -d /dev/video0 -c contrast=128
-
-
-## Autofocus
-
-Most cameras focus automatically, i.e., it is continuously adjusted to maintain sharpness of the face as the distance to the camera changes. 
-In a lab setting, participants usually have a constant distance to the camera which allows to disable the feature via `"autofocus": false`.
-This may reduce latency and avoid tracking problems when blurry images occur during re-focussing.
-
-The focus and zoom can also be set by
-
-    v4l2-ctl -d /dev/video0 -c focus_automatic_continuous=0
-    v4l2-ctl -d /dev/video0 -c focus_absolute=50 
-    v4l2-ctl -d /dev/video0 -c zoom_absolute=100
-    
-
-## Other parameters
-
-Other parameters of webcams include automatic white balance, backlight compensation, etc.
-You can get a full list of the parameters in Window's configuration dialog or in Linux using
-
-    v4l2-ctl -d /dev/video0 --all
-
-
-# 4. Latency Calibration
-
-
-We provide a method for calibrating the end-to-end latency of the OVMF.
-The method is described in detail in our [paper](README.md#the-open-virtual-mirror-framework-ovmf).
-The Jupyter notebook can be found [Jupyter notebook](./latency_calibration/end-to-end-latency.ipynb).
-
-![latency_experiment_setup_example](./latency_calibration/latency_experiment_setup_example.jpg)
-
-The steps of the calibration procedure are:
-
-1. A video of an avatar doing a head turn as [here](./latency_calibration/head_turn.mp4) is prerecorded and continuously replayed.
-
-2. The video is captured by the webcam which is used by the OVMF such that the tracked movements are transferred to a second avatar which is displayed on the screen, e.g., within PsychoPy.
-An example calibration pipeline can be found [here](config/pipelines/latency_calibration.json). 
-It can be started with `python start.py -p latency_calibration`. 
-You may use your own experimental pipeline.
-
-3. Both avatars are displayed next to each other. Make sure that the webcam used by the OVMF only captures the prerecorded video, similar to the setup above.
-
-4. A second camera is used to record both avatars, e.g., with an Android mobile phone with OpenCamera, available via the [Playstore](https://play.google.com/store/apps/details?id=net.sourceforge.opencamera&hl=de&gl=US) or [F-droid](https://f-droid.org/en/packages/net.sourceforge.opencamera/). Make sure to use a high frame rate.
-
-5. Use the [OpenFace Toolkit](https://github.com/TadasBaltrusaitis/OpenFace/) to automatically track the poses of the two faces. 
-    This can be done using the command line tool
-
-                FaceLandmarkVidMulti -f <filename>.mp4
-                
-    It will generate a csv (normally in a subfolder called *processed*) which can be read by this script.
-
-6. Adjust the path in the notebook's parameter section to point to the csv file and run the cells. 
-Note that you may need to correct face ids which were assigned by OpenFace.
 
 
