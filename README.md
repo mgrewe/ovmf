@@ -26,8 +26,9 @@ A detailed description of the OVMF can be found in our BRM paper. Please cite it
 > Grewe, C.M., Liu, T., Hildebrandt, A., & Zachow, S. *The Open Virtual Mirror Framework for enfacement illusions. Enhancing the sense of agency with avatars that imitate facial expressions.* Behavior Research Methods (2022) https://doi.org/10.3758/s13428-021-01761-9
 
 
+## Funding
 
-The OVMF has been established by the project [EMOTIC](http://www.activeself.de/emotic-enfacement-manipulation-in-transmitted-inter-facial-communication/).
+The OVMF has been established in collaboration with the [Dept. of Psychological Methods and Statistics](https://uol.de/en/psychology/psychological-methods-and-statistics), University of Oldenburg, as part of the project [EMOTIC](http://www.activeself.de/emotic-enfacement-manipulation-in-transmitted-inter-facial-communication/).
 It will be further developed in the project [The Cognitive Control of Social Resonance](http://www.activeself.de/the-cognitive-control-of-social-resonance/).
 Both projects are part of the Special Priority Programme [The Active Self](http://www.activeself.de/) which is funded by the German Research Foundation.
 
