@@ -13,7 +13,9 @@ In any case, be sure to read about the [configuration of your webcam](./WEBCAM.m
 Please follow the instructions step-by-step.
 ## 1.1 Install software libraries
 
-If not installed on your system, please download and install the following packages.
+Please download and install the following packages. 
+The setups might tell you that the packages are already installed.
+In this case, re-installation is typically not necessary.
 
 - [Microsoft VC Runtime Libraries (16)](https://aka.ms/vs/16/release/vc_redist.x64.exe).
 - [Miniconda 64-Bit](https://repo.anaconda.com/miniconda/Miniconda3-latest-Windows-x86_64.exe).
@@ -23,7 +25,10 @@ For more information check [this guide](https://docs.conda.io/projects/conda/en/
 
 ## 1.2 Setup Conda environment
 
-Open the `Anaconda Prompt` from the start menu. It will typically open in your user's home directory, e.g., `c:\Users\mgrewe`. You can change to a different directory or just install the OVMF there. 
+Open the application called `Anaconda Prompt` from the start menu. 
+It will typically open in your user's home directory, e.g., `c:\Users\mgrewe`. 
+You can change to a different directory or just install the OVMF there. 
+All files will be automatically created in a sub-directory called `ovmf`.
 
 To prepare and activate a conda environment, type the following lines into the `Anaconda Prompt`:
 
