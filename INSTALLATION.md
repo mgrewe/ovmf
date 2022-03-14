@@ -2,9 +2,9 @@
 
 We provide two ways of installing OVMF on your computer:
 
-1. [Easy method](#easy-installation-for-windows): Step-by-step installation that uses a binary package created by us. This method works with Windows only. 
+1. [Easy method](#1-easy-installation-for-windows): Step-by-step installation that uses a binary package created by us. This method works with Windows only. 
 
-2. [Advanced method](#advanced-installation): Advanced installation including preparation of Blender and compilation of OpenFace. This works for Windows and Linux systems.
+2. [Advanced method](#2-advanced-installation): Advanced installation including preparation of Blender and compilation of OpenFace. This works for Windows and Linux systems.
 
 In any case, be sure to read about the [configuration of your webcam](./WEBCAM.md).
 
