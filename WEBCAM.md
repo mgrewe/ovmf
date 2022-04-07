@@ -1,5 +1,11 @@
 # Webcam Setup
 
+A system might have multiple webcams connected. 
+By default, the OVMF uses the first camera device which is found.
+The cameras can be changed in the configuration files as described in [here](./USAGE.md#module-parameters).
+
+## Camera Parameters
+
 The configuration of the webcam is of great importance. 
 The camera's parameters significantly effect the end-to-end latency and the tracking performance. 
 For a well-working setup, it might be necessary to tune the parameters of the specific hardware and lab environment.
