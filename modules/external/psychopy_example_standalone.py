@@ -30,5 +30,5 @@ img.setAutoDraw(True)
 # Run forever
 while True:
     # Receive and set image
-    vm_interface.receive_and_set_image(img)
+    vm_interface.receive_and_set_image(img, fill_color='gray')
     win.flip()
