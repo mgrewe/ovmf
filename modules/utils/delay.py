@@ -7,7 +7,7 @@ class Delay(ModuleBase):
 
     def process_control_commands(self, data, receiver_channel = ''):
         if data is not None:
-            if 'delay_ms' in data:
+            if 'delay_sec' in data:
                 self.config['delay_sec'] = data['delay_sec']
 
     def process(self, data, image, receiver_channel = ''):
