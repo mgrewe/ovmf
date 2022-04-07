@@ -1,5 +1,6 @@
 {
 	"webcam_input": {
+		"device": 0
 	},
 
 	"image_preview": {
