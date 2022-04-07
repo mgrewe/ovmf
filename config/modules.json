@@ -56,7 +56,8 @@
 	"delay": {
 		"file": "modules/utils/delay.py",
 		"use_sockets": true,
-		"queue_size": 1
+		"queue_size": 1,
+		"delay_sec": 5
 	},
 
 	"expression_scaling": {

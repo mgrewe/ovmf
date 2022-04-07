@@ -1,38 +1,32 @@
 from lib.module_base import ModuleBase, ProcessBase
-import auxiliary
 import numpy as np
 
 class Delay(ModuleBase):
 
-    psychopy_receiver = None
-    buffer_size = 30 * 5
     buffer = dict()
-    delay_in_ms = 0
 
     def process_control_commands(self, data, receiver_channel = ''):
         if data is not None:
             if 'delay_ms' in data:
-                self.delay_in_ms = data['delay_ms']
+                self.config['delay_sec'] = data['delay_sec']
 
     def process(self, data, image, receiver_channel = ''):
         
         if data is not None and 'timestamp' in data:
             ts = data['timestamp']
             self.buffer[ts] = data
-            self.clean_buffer()
+            delayed_data = self.get_delayed_package(data['timestamp'])
+            self.clean_buffer(data['timestamp'])
 
-        # what is the reference time? 
-        # changed from:
-        #   now = int(time.clock_gettime(time.CLOCK_MONOTONIC)*1000)
-        # to 
-        # timestamp in data
+            return delayed_data, image
 
-        return self.get_delayed_package(data['timestamp']), image
+        return data, image
 
-    def clean_buffer(self):
+    def clean_buffer(self, now):
         buffer = self.buffer
         keys = sorted(buffer.keys())
-        while (len(buffer) > self.buffer_size):
+        # Determine buffer size from delay, i.e., double it
+        while (keys[0] < (now - self.config['delay_sec'] * 1000 * 2)):
             del buffer[keys[0]]
             del keys[0]
 
@@ -50,7 +44,7 @@ class Delay(ModuleBase):
         return nn_time
 
     def get_delayed_package(self, now):
-        delayed_ts = self.get_nearest_timestamp(now - self.delay_in_ms)
+        delayed_ts = self.get_nearest_timestamp(now - self.config['delay_sec'] * 1000)
         if delayed_ts is None:
             print(now, ": no packages yet...")
             return

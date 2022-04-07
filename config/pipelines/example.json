@@ -26,7 +26,8 @@
 	"delay": {
 		"receive":{
 			"tracker_parameters": "openface_smoother"
-		}
+		},
+		"delay_sec": 0
 	},
 
 	"openface_to_fexmm_remapper": {
