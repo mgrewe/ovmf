@@ -102,40 +102,25 @@ The system-wide parameters can thus be overridden for each pipeline in the corre
 
 # Integration with External Toolboxes
 
-For convenience, the OVMF provides a [Python interface](modules/external/ovmf.py). 
+For convenience, the OVMF provides a [Python interface](ovmf.py). 
 It can be used from many toolboxes for psychological experimentation such as PsychoPy or OpenSesame.
-Here is an example code of how OVMF can be integrated into a PsychoPy experiment.
 
+If you followed our [installation instructions](./INSTALLATION.md), PsychoPy has already been installed in the `ovmf` virtual environment.
+A PsychoPy script can then be started automatically with the OVMF by inserting the `psychopy_experiment` module into the pipeline (see our [example](./config/pipelines/example.json)).
+The module provides the parameter `script` which points to the location of the script file that should be started.
 
-```python
-from psychopy import visual, core
-import ovmf
+## Usage with Other Virtual Environments
 
-# Create the virtual mirror interface
-vm_interface = ovmf.Interface()
-# Set 5 seconds delay
-vm_interface.set_delay(0)
+The OVMF can also be used from other virtual environments, such as a separate PsychoPy or OpenSesame installation.
 
-# Create PsychoPy window and image stimulus
-win = visual.Window(
-    size=[1088, 728],
-    units="pix",
-    fullscr=False,
-    gammaErrorPolicy = 'ignore',
-    waitBlanking=False)
-img = visual.ImageStim(win, units = 'pix')
-img.size = [640, 480]
-img.setAutoDraw(True)
+Therefore, the OVMF is initially started in the background.
+E.g., activate the `ovmf` environment and start our [example pipeline](./config/pipelines/example_psychopy_ex.json) which does not include the `psychopy_experiment` module by running:
 
-# Run forever
-while True:
-    # Receive and set image
-    vm_interface.receive_and_set_image(img)
-    win.flip()
-```
+    python start.py -p example_psychopy_ex
 
-PsychoPy can be started as a module directly by the OVMF (see [modules/external/psychopy_example.py](modules/external/psychopy_example.py)).
-Alternatively, the OVMF can also be started in the background while a separate PsychoPy session is used for every participant (see [modules/external/psychopy_example_standalone.py](modules/external/psychopy_example_standalone.py)).
+A PsychoPy script such as [this](./modules/external/psychopy_example_standalone.py) can then be started from a separate virtual environment.
+Remember to copy the first few lines from our example to facilitate correct localization of the OVMF. The path needs to be adjusted accordingly.
+
 
 # Creation of New Modules
 
