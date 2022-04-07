@@ -38,6 +38,7 @@ The file has a simple format:
 ```json
 {
 	"webcam_input": {
+        "device": 0
 	},
 	"openface_tracker": {
         "send_image": false,
@@ -83,7 +84,12 @@ Each channel has a name, e.g., `image_data`, and the name of the previous module
 ### Module Parameters
 
 The modules can be configured with additional parameters.
-For instance, `send_image` specifies whether the webcam image is forwarded to subsequent modules. 
+For instance, the `device` parameter of the `webcam_input` module specifies the ID of the device which should be used, i.e., `0` in this case.
+Adjust this value if you have multiple cameras and want to change the input.
+We use the numbering scheme of OpenCV, e.g., the cameras available in the system are simply enumerated (0,1,2,3,...).
+
+Another example is the `send_image` parameter specified for the `openface_tracker` module.
+It determines whether the webcam image is forwarded to subsequent modules. 
 Setting this parameter to `false` saves time and reduces latency, but later modules will only receive a `None` image.
 In the example above, modules after `openface_tracker` only process the tracked parameters such that the image can be safely discarded.
 
