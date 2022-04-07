@@ -81,8 +81,9 @@
 		"address": "tcp://127.0.0.1:42424"
 	},
 
-	"psychopy_example": {
-		"file": "modules/external/psychopy_example.py"
+	"psychopy_experiment": {
+		"file": "modules/external/psychopy_experiment.py",
+		"script": "modules/external/psychopy_example.py"
 	},
 
 	"control_commands": {

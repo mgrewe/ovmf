@@ -1,9 +1,19 @@
+#################################################
+ovmf_dir='/home/bzfgrewe/projects/ovmf'
+#         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# THIS PATH NEEDS ADJUSTMENT TO YOUR SETUP.
+# REPLACE IT WITH THE DIRECTORY WHERE THE OVMF 
+# HAS BEEN INSTALLED.
+#################################################
+import sys
+sys.path.append(ovmf_dir)
+
 from psychopy import visual, core
 import ovmf
 
 # Create the virtual mirror interface
 vm_interface = ovmf.Interface()
-# Set 5 seconds delay
+# Set delay in seconds
 vm_interface.set_delay(0)
 
 # Create PsychoPy window and image stimulus

@@ -41,12 +41,6 @@
 		"receive": {
 			"fexmm_parameters": "openface_to_fexmm_remapper"
 		}
-	},
-
-	"psychopy_experiment": {
-		"receive" : {
-			"render_output": "blender_renderer"
-		},
-		"script": "modules/external/psychopy_example.py"
 	}
+
 }

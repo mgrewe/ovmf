@@ -4,9 +4,6 @@ import time
 import numpy as np
 from PIL import Image
 
-dir = str(Path(__file__).resolve().parents[2])
-if not dir in sys.path:
-    sys.path.append(dir)
 from lib.connection import Sender, Receiver
 from lib.module_base import loadConfig
 
@@ -185,3 +182,7 @@ class Interface:
 
         im = im / 255
         return data, im
+
+if __name__ == '__main__':
+    print("This is the Python interface for external toolboxes.")
+    print("If you want to start the OVMF, please use startup.py")
