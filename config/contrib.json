@@ -1,5 +1,6 @@
 {
 	"blender_executable": "contrib/Blender/blender",
+	"unity_renderer_executable": "contrib/unity_renderer/ovmf_web",
 	"openface_binary_dir": "contrib/OpenFace/Release/",
 	"openface_model_au_root_dir": "contrib/OpenFace/"
 }
