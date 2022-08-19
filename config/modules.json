@@ -82,6 +82,12 @@
 		"address": "tcp://127.0.0.1:42424"
 	},
 
+	"unity_renderer": {
+		"file": "modules/unity/unity_renderer.py",
+		"show_screen": true,
+		"address": "tcp://127.0.0.1:42424"
+	},
+
 	"psychopy_experiment": {
 		"file": "modules/external/psychopy_experiment.py",
 		"script": "modules/external/psychopy_example.py"
