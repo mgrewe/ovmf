@@ -3,7 +3,7 @@ import numpy as np
 from lib.module_base import ModuleBase, ProcessBase
 
 
-class OpenFaceSmoother(ModuleBase):
+class Smoothing(ModuleBase):
     # Smoothing factor between 0 (no smoothing) and 1 (max smoothing, i.e., no movement)
 
     # TODO: Use time for determining smoothing factor, since it currenty depends on fps.
@@ -76,13 +76,6 @@ class OpenFaceSmoother(ModuleBase):
                 if key in self.exclude_au_from_smoothing:
                     continue
 
-                if (key == 'AU26'):
-                    # Some tuning to keep the mouth closed in rest, an offset seems to be estimated
-                    value -= 1
-                    value = max(0,value)
-                    #value *= 4/3
-                    #val = min(1,val)
-
                 value *= dynamic_smoothing_fac
                 if key in self.au_smoothing:
                     au_fac_ind = au_fac * self.au_smoothing[key]
@@ -112,4 +105,4 @@ class OpenFaceSmoother(ModuleBase):
         return data, image
 
 
-Module = ProcessBase(OpenFaceSmoother)
+Module = ProcessBase(Smoothing)

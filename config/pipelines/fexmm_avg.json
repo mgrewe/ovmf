@@ -16,9 +16,15 @@
 		}
 	},
 
-	"openface_smoother": {
+	"expression_scaling": {
 		"receive":{
 			"tracker_parameters": "openface_tracker"
+		}
+	},
+
+	"openface_smoother": {
+		"receive":{
+			"tracker_parameters": "expression_scaling"
 		}
 	},
 
@@ -33,6 +39,12 @@
 		"init": "modules/blender/blender_avatar.py",
 		"receive": {
 			"fexmm_parameters": "openface_to_fexmm_remapper"
+		}
+	},
+	
+	"psychopy_example": {
+		"receive" : {
+			"render_output": "blender_renderer"
 		}
 	}
 }

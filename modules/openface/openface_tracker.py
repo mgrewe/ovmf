@@ -44,6 +44,7 @@ class OpenFaceTracker(ModuleBase):
         data['landmark_data'] = np.array(self.tracker.landmark_data, dtype=float).tolist()
         data['landmark_visibility'] = np.array(self.tracker.landmark_visibility, dtype=float).tolist()
 
+
         return data, image
 
 

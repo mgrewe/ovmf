@@ -87,13 +87,20 @@ class BlenderFexMMReceiver(ModuleBase):
             # get and set for current model only
 
             model.scale = self.scale
+
+
+            if 'pose' in data.keys():
+                location = np.array(data['pose'][0:3])
+                # Scale to blender units
+                location *= 0.01
             
-            if 'location' in data.keys():
-                model.location = np.array(data['location']) + np.array(self.location_offset)
+                location = [-location[0], location[2], -location[1]]
+                model.location = np.array(location) + np.array(self.location_offset)
                 model.location[1] *= self.depth_scale
-                
-            if 'rotation' in data.keys():
-                model.rotation_euler = np.array(data['rotation']) + np.array(self.rotation_offset)
+
+                rotation = np.array(data['pose'][3:6])
+                rotation = np.array([rotation[0], -rotation[2], rotation[1]])
+                model.rotation_euler = rotation + np.array(self.rotation_offset)
             
             if model.data.shape_keys is not None and 'shapekeys' in data.keys():
                 for key, value in data['shapekeys'].items():

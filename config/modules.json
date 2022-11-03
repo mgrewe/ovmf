@@ -3,21 +3,21 @@
 		"file": "modules/input/webcam_input.py",
 		"use_sockets": true,
 		"queue_size": 1,
-		"device": 0,
+		"device": 2,
 		"width": 640,
 		"height": 480,
 		"fourcc": "MJPG",
 		"fps": 60,
-		"autoexposure": null,
-		"exposure": null,
+		"autoexposure": false,
+		"exposure": 25,
 		"gain": null,
 		"brightness": null,
 		"contrast": null,
 		"autofocus": null,
 		"focus": null,
-		"zoom": null,
+		"zoom": 0,
 		"win_props_dialog": true,
-		"scale": 1.0,
+		"scale": 0.5,
 		"delay": 0,
 		"capture_thread": false
 	},
@@ -28,8 +28,8 @@
 		"queue_size": 1
 	},
 	
-	"openface_to_fexmm_remapper": {
-		"file": "modules/fexmm/openface_to_fexmm_remapper.py",
+	"fexmm_remapper": {
+		"file": "modules/fexmm/fexmm_remapper.py",
 		"maps": "lra",
 		"use_sockets": true,
 		"queue_size": 1
@@ -40,15 +40,21 @@
 		"use_sockets": true,
 		"queue_size": 1
 	},
-	
+
 	"openface_service": {
 		"file": "modules/openface/openface_service.py",
 		"use_sockets": true,
 		"queue_size": 1
 	},
-	
-	"openface_smoother": {
-		"file": "modules/openface/openface_smoother.py",
+
+	"openface_remapper": {
+		"file": "modules/openface/openface_remapper.py",
+		"use_sockets": true,
+		"queue_size": 1
+	},
+
+	"smoothing": {
+		"file": "modules/utils/smoothing.py",
 		"use_sockets": true,
 		"queue_size": 1
 	},
@@ -85,11 +91,13 @@
 	"unity_renderer": {
 		"file": "modules/unity/unity_renderer.py",
 		"show_screen": true,
+		"screen_width": 1080,
+		"screen_height": 720,
 		"address": "tcp://127.0.0.1:42424"
 	},
 
-	"psychopy_experiment": {
-		"file": "modules/external/psychopy_experiment.py",
+	"external_script": {
+		"file": "modules/external/external_script.py",
 		"script": "modules/external/psychopy_example.py"
 	},
 

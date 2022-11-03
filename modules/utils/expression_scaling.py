@@ -5,7 +5,7 @@ class ExpressionScaling(ModuleBase):
 
     def __init__(self, config, **kwargs):
         super().__init__(config, **kwargs)
-        self.au_scale = config['expressionscaling_au_scale']
+        self.au_scale = float(config['expressionscaling_au_scale'])
 
 
     def process(self, data, image, receiver_channel):

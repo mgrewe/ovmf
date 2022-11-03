@@ -6,7 +6,7 @@ from lib.module_base import ModuleBase, ProcessBase
 from lib.auxiliary import get_time_ms
 
 
-class OpenFaceToFexMMRemapper(ModuleBase):
+class FexMMRemapper(ModuleBase):
     
     # Determine which movements should be transfered
     send_aus = True
@@ -26,7 +26,7 @@ class OpenFaceToFexMMRemapper(ModuleBase):
             # Nose wrinkler
             'AU09': ('AU_9', 1),
             # Mouth units
-            'AU10': ('AU_10', 0.2),
+            'AU10': ('AU_10', 1),
             'AU12': ('AU_12', 1),
             'AU14': ('AU_14', 1),
             'AU15': ('AU_15', 1),
@@ -34,7 +34,7 @@ class OpenFaceToFexMMRemapper(ModuleBase):
             'AU20': ('AU_20', 1),
             'AU23': ('AU_23', 1),
             'AU25': ('AU_25', 1),
-            'AU26' : ('AU_26', 1.5)
+            'AU26' : ('AU_26', 1)
             #'AU28' NA
             }
     
@@ -69,43 +69,26 @@ class OpenFaceToFexMMRemapper(ModuleBase):
         parameters = data
         fexmm_parameters = copy.copy(parameters)
 
-        ############## LOCATION
-        
-        if (self.send_location and 'pose' in parameters):
-            location = np.array(parameters['pose'][0:3])
-            # Scale to blender units
-            location[2] -= 700
-            location *= 0.01
-            
-            fexmm_parameters['location'] = [-location[0], location[2], -location[1]]
-
-        ############## ROTATION
-
-        if (self.send_rotation and 'pose' in parameters):        
-            rotation = np.array(parameters['pose'][3:6])
-            rotation = np.array([rotation[0], -rotation[2], rotation[1]])
-            fexmm_parameters['rotation'] = rotation.tolist()
 
         ############### AU's
         if (self.send_aus and 'au' in parameters):
+
             fexmm_parameters['shapekeys'] = {}
-            for openface, (fexmm, fac) in self.catch_au.items():
-                if openface in parameters['au']:
-                    val = parameters['au'][openface] / 4 * fac
-                    fexmm_parameters['shapekeys'][fexmm] = val
+            for au, (fexmm, fac) in self.catch_au.items():
+                if au in parameters['au']:
+                    fexmm_parameters['shapekeys'][fexmm] = parameters['au'][au]
         
         ################ EYES
         
         if (self.send_eyes):
             if ('au' in parameters):
-                for openface, fexmm in self.blink.items():
-                    blink = parameters['au'][openface] / 3
-                    if blink > 1:
-                        blink = 1
-                    for f in fexmm:
-                        fexmm_parameters['shapekeys'][f] = blink
+                for au, fexmm in self.blink.items():
+                    if au in parameters['au']:
+                        for f in fexmm:
+                            fexmm_parameters['shapekeys'][f] = parameters['au'][au]
              
             if ('gaze' in parameters):
+                print(parameters['gaze'])
                 gaze = np.array(parameters['gaze'])
                 # need to compensate for head pose in gaze estimation
                 gaze = np.array([gaze[1], 0, -gaze[0]])
@@ -121,5 +104,5 @@ class OpenFaceToFexMMRemapper(ModuleBase):
         return fexmm_parameters, image
 
 
-Module = ProcessBase(OpenFaceToFexMMRemapper)
+Module = ProcessBase(FexMMRemapper)
     

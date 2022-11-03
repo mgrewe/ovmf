@@ -152,21 +152,25 @@ class Interface:
 
             # SLOW. TODO: Improve and fix if image exceeds ImageStim size
             if image is not None:
+                # print(image.shape)
                 if adjust_render_size:
                     img = Image.fromarray(image).convert('RGBA')
                     size = (int(imgStim.size[0]),int(imgStim.size[1]))
                     img.thumbnail(size)
                     image = Image.new('RGBA', size, fill_color)   
-                    size = (int((imgStim.size[0] - img.size[0])/2),
+                    offset = (int((imgStim.size[0] - img.size[0])/2),
                         int((imgStim.size[1] - img.size[1])/2))
-                    image.paste(img, size)
+                    image.paste(img, offset)
                     image = image.convert('RGB')
                     image = np.asarray(image)
                     image = image / 255
                 else:
                     imgStim.size = (image.shape[1] , image.shape[0])
                     image = image / 255
-                imgStim.setImage(image)
+                size = imgStim.size
+                imgStim.image = image
+                # Workaround to avoid imagestim to resize
+                imgStim.size = size
             return data
 
         return None

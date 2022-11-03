@@ -25,6 +25,8 @@ class Proc(ProcessBase):
 		cmd += ['-tracker_host', str(list(config['receive'].values())[0])]
 		cmd += ['-control_commands_host', str(config['control_commands'])]
 		cmd += ['-show_screen', str(config['show_screen'])]
+		cmd += ['-screen-width', str(config['screen_width'])]
+		cmd += ['-screen-height', str(config['screen_height'])]
 		cmd += ['-pipeline', config['pipeline']]
 		cmd += ['-logfile', f'logs/{config["name"]}.txt']
 

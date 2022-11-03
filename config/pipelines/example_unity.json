@@ -29,17 +29,29 @@
 		}
 	},
 
-	"fexmm_remapper": {
-		"receive" : {
+	"expression_scaling": {
+		"expressionscaling_au_scale": "1",
+		"receive":{
 			"tracker_parameters": "smoothing"
 		}
 	},
 
-	"blender_renderer": {
-		"blend": "data/FexMM_Head.blend",
-		"init": "modules/blender/blender_avatar.py",
+	"fexmm_remapper": {
+		"receive" : {
+			"tracker_parameters": "expression_scaling"
+		}
+	},
+
+	"unity_renderer": {
 		"receive": {
 			"fexmm_parameters": "fexmm_remapper"
 		}
+	},
+
+	"external_script": {
+		"receive" : {
+			"render_output": "unity_renderer"
+		},
+		"script": "modules/external/psychopy_example.py"
 	}
 }
