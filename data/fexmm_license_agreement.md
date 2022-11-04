@@ -18,7 +18,7 @@ The requestor agrees to the following terms:
 
 4. Citation: All documents reporting on any research which uses the FexMM have to cite the following article:
 
-    > Grewe, C.M., Liu, T., Kahl, C.A., Hildebrandt, A., & Zachow, S. Statistical Learning of Facial Expressions Improves Realism of Animated Avatar Faces. Frontiers in Virtual Reality (2021)
+    > Grewe, C.M., Liu, T., Kahl, C.D., Hildebrandt, A., & Zachow, S. Statistical Learning of Facial Expressions Improves Realism of Animated Avatar Faces. Frontiers in Virtual Reality (2021)
 
 5. Warranty: THE FEXMM IS PROVIDED "AS IS" AND THE PROVIDER GIVES NO EXPRESS OR IMPLIED WARRANTIES OF ANY KIND, INCLUDING WITHOUT LIMITATION THE WARRANTIES OF FITNESS FOR ANY PARTICULAR PURPOSE AND NON-INFRINGEMENT. 
 IN NO EVENT SHALL THE PROVIDER BE HELD RESPONSIBLE FOR LOSS OR DAMAGE CAUSED BY THE USE OF THE FEXMM.
