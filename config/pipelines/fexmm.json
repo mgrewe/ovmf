@@ -16,35 +16,30 @@
 		}
 	},
 
-	"expression_scaling": {
+	"openface_remapper": {
+		"send_image": false,
 		"receive":{
-			"tracker_parameters": "openface_tracker"
+			"image_data": "openface_tracker"
 		}
 	},
 
-	"openface_smoother": {
+	"smoothing": {
 		"receive":{
-			"tracker_parameters": "expression_scaling"
+			"tracker_parameters": "openface_remapper"
 		}
 	},
 
-	"openface_to_fexmm_remapper": {
+	"fexmm_remapper": {
 		"receive" : {
-			"tracker_parameters": "openface_smoother"
+			"tracker_parameters": "smoothing"
 		}
 	},
 
 	"blender_renderer": {
-		"blend": "data/fexmm_avg_face.blend",
+		"blend": "data/FexMM_Face_pub.blend",
 		"init": "modules/blender/blender_avatar.py",
 		"receive": {
-			"fexmm_parameters": "openface_to_fexmm_remapper"
-		}
-	},
-	
-	"psychopy_example": {
-		"receive" : {
-			"render_output": "blender_renderer"
+			"fexmm_parameters": "fexmm_remapper"
 		}
 	}
 }

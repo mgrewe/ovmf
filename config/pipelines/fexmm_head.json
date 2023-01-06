@@ -1,0 +1,45 @@
+{
+	"webcam_input": {
+	},
+
+	"image_preview": {
+		"receive":{
+			"image_data": "webcam_input",
+			"tracker_parameters": "openface_tracker"
+		}
+	},
+
+	"openface_tracker": {
+		"send_image": false,
+		"receive":{
+			"image_data": "webcam_input"
+		}
+	},
+
+	"openface_remapper": {
+		"send_image": false,
+		"receive":{
+			"image_data": "openface_tracker"
+		}
+	},
+
+	"smoothing": {
+		"receive":{
+			"tracker_parameters": "openface_remapper"
+		}
+	},
+
+	"fexmm_remapper": {
+		"receive" : {
+			"tracker_parameters": "smoothing"
+		}
+	},
+
+	"blender_renderer": {
+		"blend": "data/FexMM_Head_pub.blend",
+		"init": "modules/blender/blender_avatar.py",
+		"receive": {
+			"fexmm_parameters": "fexmm_remapper"
+		}
+	}
+}
