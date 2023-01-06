@@ -36,7 +36,7 @@
 	},
 
 	"blender_renderer": {
-		"blend": "data/FexMM_Head.blend",
+		"blend": "data/CubeFace.blend",
 		"init": "modules/blender/blender_avatar.py",
 		"receive": {
 			"fexmm_parameters": "fexmm_remapper"
