@@ -92,7 +92,7 @@ class BlenderFexMMReceiver(ModuleBase):
             if 'pose' in data.keys():
                 location = np.array(data['pose'][0:3])
                 # Scale to blender units
-                location *= 0.01
+                location = location * 0.01
             
                 location = [-location[0], location[2], -location[1]]
                 model.location = np.array(location) + np.array(self.location_offset)
