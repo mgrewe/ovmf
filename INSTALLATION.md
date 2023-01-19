@@ -36,6 +36,8 @@ To prepare and activate a conda environment, type the following lines into the `
     conda activate ovmf
     conda install git git-lfs
 
+We tested with Python version 3.9, but the OVMF should also run on newer versions (please report any issues).
+
 ## 1.3 Clone OVMF repository
 
 Now, clone the git repository by execution of:
