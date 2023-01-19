@@ -46,7 +46,7 @@ Refer to the [installation instructions](./INSTALLATION.md).
 
 2. Please also read about the [configuration of your webcam](./WEBCAM.md).
 
-3. Details on the calibration of a systems end-to-end latency can be found [here](./latency_calibration/README.md).
+3. Details on the calibration of a system's end-to-end latency can be found [here](./latency_calibration/README.md).
 
 # Contribution
 
