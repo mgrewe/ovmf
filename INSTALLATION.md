@@ -171,7 +171,7 @@ Adjust the paths in `ovmf/config/contrib.json` accordingly.
 Below the OVMF directory, relative paths can be used, e.g.,
 
     {
-        "blender_executable": "contrib/Blender/blender",
+        "blender_renderer_executable": "contrib/Blender/blender",
         "openface_binary_dir": "contrib/OpenFace/build/bin/",
         "openface_model_au_root_dir": "contrib/OpenFace/build/bin/"
     }

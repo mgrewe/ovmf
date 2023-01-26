@@ -23,7 +23,7 @@ class Proc(ProcessBase):
 
 		dir = Path(__file__).resolve().parents[2]
 		with open(dir / 'config/contrib.json') as handle:
-			executable_path = Path(json.loads(handle.read())['blender_executable'])
+			executable_path = Path(json.loads(handle.read())['blender_renderer_executable'])
 			if not executable_path.is_absolute():
 				executable_path = dir / executable_path
 
