@@ -38,7 +38,8 @@
 	"openface_tracker": {
 		"file": "modules/openface/openface_tracker.py",
 		"use_sockets": true,
-		"queue_size": 1
+		"queue_size": 1,
+		"tracker_parameters" : "-wild -au_static"
 	},
 
 	"openface_service": {

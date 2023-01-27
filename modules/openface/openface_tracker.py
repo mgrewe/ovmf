@@ -24,7 +24,11 @@ class OpenFaceTracker(ModuleBase):
 
         sys.path.append(str(openface_binary_dir))
         from openface import OpenFace
-        self.tracker = OpenFace(str(openface_model_au_root_dir))
+        parameters = str(openface_model_au_root_dir)
+        if 'tracker_parameters' in config:
+            parameters += " " + config['tracker_parameters']
+        print("Starting OpenFace with parameters {}".format(parameters))
+        self.tracker = OpenFace(parameters)
 
 
     def process(self, data, image, receiver_channel):
@@ -37,13 +41,11 @@ class OpenFaceTracker(ModuleBase):
         if not success:
             return None, None
 
-
         data['pose'] = np.array(self.tracker.pose, dtype=float).tolist()
         data['au'] = dict(self.tracker.au)
         data['au_binary'] = dict(self.tracker.au_binary)
         data['landmark_data'] = np.array(self.tracker.landmark_data, dtype=float).tolist()
         data['landmark_visibility'] = np.array(self.tracker.landmark_visibility, dtype=float).tolist()
-
 
         return data, image
 
