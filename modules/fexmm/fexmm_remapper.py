@@ -17,24 +17,24 @@ class FexMMRemapper(ModuleBase):
     # OpenFace AU, (FexMM Shapekey, scaling factor)
     catch_au = {
             # Eye units
-            'AU01': ('AU_1', 1),
-            'AU02': ('AU_2', 1),
-            'AU04': ('AU_4', 1),
-            'AU05': ('AU_5', 1),
-            'AU06': ('AU_6', 1),
-            'AU07': ('AU_7', 1),
+            'AU_1': ('AU_1', 1),
+            'AU_2': ('AU_2', 1),
+            'AU_4': ('AU_4', 1),
+            'AU_5': ('AU_5', 1),
+            'AU_6': ('AU_6', 1),
+            'AU_7': ('AU_7', 1),
             # Nose wrinkler
-            'AU09': ('AU_9', 1),
+            'AU_9': ('AU_9', 1),
             # Mouth units
-            'AU10': ('AU_10', 1),
-            'AU12': ('AU_12', 1),
-            'AU14': ('AU_14', 1),
-            'AU15': ('AU_15', 1),
-            'AU17': ('AU_17', 1),
-            'AU20': ('AU_20', 1),
-            'AU23': ('AU_23', 1),
-            'AU25': ('AU_25', 1),
-            'AU26' : ('AU_26', 1)
+            'AU_10': ('AU_10', 1),
+            'AU_12': ('AU_12', 1),
+            'AU_14': ('AU_14', 1),
+            'AU_15': ('AU_15', 1),
+            'AU_17': ('AU_17', 1),
+            'AU_20': ('AU_20', 1),
+            'AU_23': ('AU_18', 1),
+            'AU_25': ('AU_25', 1),
+            'AU_26' : ('AU_26', 1)
             #'AU28' NA
             }
     
@@ -66,36 +66,35 @@ class FexMMRemapper(ModuleBase):
 
 
     def process(self, data, image, channel_name):
-        parameters = data
-        fexmm_parameters = copy.copy(parameters)
+        fexmm_parameters = copy.deepcopy(data)
 
 
         ############### AU's
-        if (self.send_aus and 'au' in parameters):
+        if (self.send_aus and 'au' in data):
 
-            fexmm_parameters['shapekeys'] = {}
+            fexmm_parameters['au'] = {}
             for au, (fexmm, fac) in self.catch_au.items():
-                if au in parameters['au']:
-                    fexmm_parameters['shapekeys'][fexmm] = parameters['au'][au]
+                if au in data['au']:
+                    fexmm_parameters['au'][fexmm] = data['au'][au] * fac
+            fexmm_parameters['au'][fexmm]
         
         ################ EYES
         
         if (self.send_eyes):
-            if ('au' in parameters):
+            if ('au' in data):
                 for au, fexmm in self.blink.items():
-                    if au in parameters['au']:
+                    if au in data['au']:
                         for f in fexmm:
-                            fexmm_parameters['shapekeys'][f] = parameters['au'][au]
+                            fexmm_parameters['au'][f] = data['au'][au]
              
-            if ('gaze' in parameters):
-                print(parameters['gaze'])
-                gaze = np.array(parameters['gaze'])
+            if ('gaze' in data):
+                gaze = np.array(data['gaze'])
                 # need to compensate for head pose in gaze estimation
                 gaze = np.array([gaze[1], 0, -gaze[0]])
                 rot_gaze = Rotation.from_euler('XYZ', gaze)
  
-                if (self.send_rotation and 'pose' in parameters):
-                    rotation = np.array(parameters['pose'][3:6])
+                if (self.send_rotation and 'pose' in data):
+                    rotation = np.array(data['pose'][3:6])
                     head_rotation = Rotation.from_euler('XYZ', rotation)
                     rot_gaze = head_rotation.inv() * rot_gaze   
                  

@@ -102,8 +102,8 @@ class BlenderFexMMReceiver(ModuleBase):
                 rotation = np.array([rotation[0], -rotation[2], rotation[1]])
                 model.rotation_euler = rotation + np.array(self.rotation_offset)
             
-            if model.data.shape_keys is not None and 'shapekeys' in data.keys():
-                for key, value in data['shapekeys'].items():
+            if model.data.shape_keys is not None and 'au' in data.keys():
+                for key, value in data['au'].items():
                     if key in model.data.shape_keys.key_blocks.keys():
                         model.data.shape_keys.key_blocks[key].value = value
             
