@@ -1,6 +1,6 @@
 {
-	"unity_renderer_executable": "/home/bzfgrewe/projects/ovmf_web/Build/ovmf_unity_renderer.x86_64",
-	"blender_executable": "/usr/bin/blender",
-	"openface_binary_dir": "contrib/OpenFace/build/bin/",
-	"openface_model_au_root_dir": "contrib/OpenFace/build/bin/"
+	"unity_renderer_executable": "contrib/unity/ovmf_unity_renderer.x86_64",
+	"blender_executable": "contrib/Blender/blender.exe",
+	"openface_binary_dir": "contrib/OpenFace/Release/",
+	"openface_model_au_root_dir": "contrib/OpenFace/"
 }
