@@ -3,7 +3,7 @@
 		"file": "modules/input/webcam_input.py",
 		"use_sockets": true,
 		"queue_size": 1,
-		"device": 2,
+		"device": 0,
 		"width": 640,
 		"height": 480,
 		"fourcc": "MJPG",
