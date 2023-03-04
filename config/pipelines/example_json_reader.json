@@ -1,0 +1,24 @@
+{
+
+	"json_disk_reader": {
+		"fps":"30",
+		"json_filenames": {
+			"example": "data/json_tracking_data_example.json"
+		},
+		"auto_replay": false
+	},
+
+	"fexmm_remapper": {
+		"receive" : {
+			"tracker_parameters": "json_disk_reader"
+		}
+	},
+
+	"blender_renderer": {
+		"blend": "data/FexMM_Head_pub.blend",
+		"init": "modules/blender/blender_avatar.py",
+		"receive": {
+			"fexmm_parameters": "fexmm_remapper"
+		}
+	}
+}
