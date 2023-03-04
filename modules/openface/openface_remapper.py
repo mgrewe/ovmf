@@ -38,6 +38,7 @@ class OpenFaceRemapper(ModuleBase):
     
     
     au_scale = 2
+    # hflip = False
 
     def __init__(self, config, **kwargs):
         super().__init__(config, **kwargs)
@@ -48,6 +49,9 @@ class OpenFaceRemapper(ModuleBase):
 
     def process(self, data, image, channel_name):
 
+        if data is None:
+            return data, image
+
         # Translate
         if ('pose' in data):
             data['pose'][2] *= 2#700
@@ -56,7 +60,7 @@ class OpenFaceRemapper(ModuleBase):
         ############### AU's
         if ('au' in data):
             for au in data['au'].keys():
-                data['au'][au] = (data['au'][au] / 4 * self.au_scale) - 0.2
+                data['au'][au] = (data['au'][au] / 4. * self.au_scale) - 0.2
 
                 # if (au == 'AU26'):
                 #         # Some tuning to keep the mouth closed in rest, an offset seems to be estimated
@@ -68,13 +72,11 @@ class OpenFaceRemapper(ModuleBase):
                 # Ensure AUs are in [0,1]
                 data['au'][au] = max(0,data['au'][au])
                 data['au'][au] = min(1,data['au'][au])
-            print(data['au'])
             for au, mapto in self.remap.items():
                 if (au in data['au']) and not au == mapto:
                     data['au'][mapto] = data['au'][au]
                     data['au'].pop(au)
  
-        print(data['au'])
         # Blink
         # blink = parameters['au'][au] / 3
         #     if blink > 1:
