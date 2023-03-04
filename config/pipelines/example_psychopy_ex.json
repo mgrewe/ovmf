@@ -1,12 +1,11 @@
 {
 	"webcam_input": {
-		"device": 0
 	},
 
 	"image_preview": {
 		"receive":{
 			"image_data": "webcam_input",
-			"tracker_parameters": "openface_tracker"
+			"tracker_data": "openface_tracker"
 		}
 	},
 
@@ -17,30 +16,36 @@
 		}
 	},
 
-	"openface_smoother": {
+	"openface_remapper": {
+		"send_image": false,
 		"receive":{
-			"tracker_parameters": "openface_tracker"
+			"image_data": "openface_tracker"
 		}
 	},
 
-	"delay": {
+	"smoothing": {
 		"receive":{
-			"tracker_parameters": "openface_smoother"
-		},
-		"delay_sec": 0
+			"tracker_parameters": "openface_remapper"
+		}
 	},
 
-	"openface_to_fexmm_remapper": {
+	"fexmm_remapper": {
 		"receive" : {
-			"tracker_parameters": "delay"
+			"tracker_parameters": "smoothing"
 		}
 	},
 
 	"blender_renderer": {
-		"blend": "data/CubeFace.blend",
+		"blend": "data/FexMM_Face_pub.blend",
 		"init": "modules/blender/blender_avatar.py",
 		"receive": {
-			"fexmm_parameters": "openface_to_fexmm_remapper"
+			"fexmm_parameters": "fexmm_remapper"
+		}
+	},
+
+	"external_script": {
+		"receive" : {
+			"render_output": "blender_renderer"
 		}
 	}
 
