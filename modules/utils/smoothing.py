@@ -1,5 +1,5 @@
 import numpy as np
-
+from copy import deepcopy
 from lib.module_base import ModuleBase, ProcessBase
 
 
@@ -38,6 +38,19 @@ class Smoothing(ModuleBase):
     
     last_data = None
 
+    
+    def __init__(self, config,  **kwargs):
+
+        super().__init__(config,**kwargs)
+
+        if 'pose' in config:
+            self.smoothing['pose_rotation'] = float(config['pose'])
+            self.smoothing['pose_location'] = float(config['pose'])
+
+        self.process_control_commands(config)
+
+        print('Smoothing factors:',self.smoothing)
+
     def process_control_commands(self, update, receiver_channel = ''):
         if not update:
             return
@@ -51,6 +64,10 @@ class Smoothing(ModuleBase):
 
     def process(self, data, image, receiver_channel):
         
+
+        if data is None:
+            return data, image
+
         au_fac = self.smoothing['au']
         pose_rotation_fac = self.smoothing['pose_rotation']
         pose_location_fac = self.smoothing['pose_location']
@@ -58,7 +75,7 @@ class Smoothing(ModuleBase):
 
         
         if (self.last_data == None):
-            self.last_data = data
+            self.last_data = deepcopy(data)
             return data, image
 
         if ('au' in data):
@@ -100,7 +117,7 @@ class Smoothing(ModuleBase):
             data['gaze'] = gaze.tolist()
 
 
-        self.last_data = data
+        self.last_data = deepcopy(data)
 
         return data, image
 

@@ -22,10 +22,31 @@
 		"capture_thread": false
 	},
 
+
+	"video_input":{
+		"file": "modules/input/video_input.py",
+		"video_filename" : "",
+		"use_sockets": true,
+		"fps": 25,
+		"scale": 1,
+		"video_input_hflip": false,
+		"video_input_vflip": false
+	},
+
 	"image_preview":{
 		"file": "modules/utils/image_preview.py",
 		"use_sockets": true,
 		"queue_size": 1
+	},
+
+	"json_disk_reader": {
+		"file": "modules/input/json_disk_reader.py",
+		"json_filenames": {
+		},
+		"use_sockets": true,
+		"queue_size": 1,
+		"fps": 30,
+		"auto_replay": false
 	},
 	
 	"fexmm_remapper": {
@@ -57,7 +78,10 @@
 	"smoothing": {
 		"file": "modules/utils/smoothing.py",
 		"use_sockets": true,
-		"queue_size": 1
+		"queue_size": 1,
+		"smoothing_factor_pose": 0.5,
+		"smoothing_factor_au": 0.6
+
 	},
 	
 	"delay": {
