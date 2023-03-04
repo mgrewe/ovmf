@@ -26,8 +26,9 @@ For more information check [this guide](https://docs.conda.io/projects/conda/en/
 ## 1.2 Setup Conda environment
 
 Open the application called `Anaconda Prompt` from the start menu. 
-It will typically open in your user's home directory, e.g., `c:\Users\mgrewe`. 
+It will typically open in your user's home directory, e.g., `c:\Users\mgrewe`.  
 You can change to a different directory or just install the OVMF there. 
+Please make sure that the path does not include spaces.
 All files will be automatically created in a sub-directory called `ovmf`.
 
 To prepare and activate a conda environment, type the following lines into the `Anaconda Prompt`:
