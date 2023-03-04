@@ -14,7 +14,6 @@ import lib.auxiliary as aux
 
 class ModuleBase():
 
-    sleep_time = 0
     poll_timeout = 0
     module_measurement = True
 
@@ -132,6 +131,9 @@ class ModuleBase():
         while True:
             self.update()
             time.sleep(sleep_time)
+
+    def finalize(self):
+        pass
 
 
 
