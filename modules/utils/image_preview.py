@@ -11,7 +11,7 @@ class ImagePreview(ModuleBase):
 
     def process(self, data, image, receiver_channel):
 
-        if 'tracker_data' == self.receiver:
+        if 'tracker_data' in self.receiver:
             if receiver_channel == 'image_data':
                 self.last_image.append([data, image])
             else:
