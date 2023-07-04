@@ -118,7 +118,7 @@ class ModuleBase():
                 if data:
                     data, image = self.process_and_measure(data, image, channel_name)
                 if data and self.sender:
-                    self.sender.send(data, image)
+                    self.sender.send(data, image if self.config['send_image'] else None)
         elif self.sender:
             # We don't have receiver but sender
             data, image = self.process_and_measure(None, None, '')
